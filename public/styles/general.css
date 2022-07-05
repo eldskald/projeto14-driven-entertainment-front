@@ -1,0 +1,26 @@
+:root {
+    --displayfont: 'Saira Stencil One', cursive;
+    --scriptfont: 'Ubuntu', sans-serif;
+    --maincolor: #7d15aa;
+    --brightcolor: #fefefe;
+    --graycolor: #888888;
+    --darkcolor: #080808;
+    --bgcolor: #360c47;
+    --poscolor: #03ac00;
+    --negcolor: #e73737;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: var(--scriptfont);
+    font-weight: 400;
+}
+
+#root {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: var(--bgcolor);
+}
