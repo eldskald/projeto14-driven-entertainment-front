@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { ThreeDots } from 'react-loader-spinner';
+import UserContext from '../shared/userContext';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Login() {
 
+    const { setToken, setUsername } = useContext(UserContext);
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -19,7 +23,17 @@ function Login() {
 
         setSubmitting('loading');
         const body = { email, password };
-        // Requisição pelo axios aqui
+        axios.post(`${API_URL}/login`, body)
+            .then(res => {
+                console.log(res.data.token);
+                setToken(res.data.token);
+                setUsername(res.data.username);
+                navigate('/');
+            })
+            .catch(err => {
+                setError(err.response.data);
+                setSubmitting('');
+            });
     }
 
     function SubmitButton({ text, loading }) {

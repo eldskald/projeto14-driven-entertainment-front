@@ -4,6 +4,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { ThreeDots } from 'react-loader-spinner';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function SignUp() {
 
     const navigate = useNavigate();
@@ -21,7 +23,13 @@ function SignUp() {
 
         setSubmitting('loading');
         const body = { name, email, password, passwordConfirm };
-        // Requisição pelo axios aqui
+        axios.post(`${API_URL}/signup`, body)
+            .then(() => {navigate('/login')})
+            .catch(err => {
+                console.log(err);
+                setError(err.response.data);
+                setSubmitting('');
+            });
     }
 
     function SubmitButton({ text, loading }) {
