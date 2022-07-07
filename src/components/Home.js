@@ -1,8 +1,10 @@
-import React from "react";
+import { useContext } from 'react';
+import UserContext from '../shared/userContext';
 
 function Home() {
+    const { username } = useContext(UserContext);
     return (
-        <>Nada por enquanto</>
+        <>{ username ? `Bom dia ${username}!` : 'Ninguém logado'}</>
     );
 }
 

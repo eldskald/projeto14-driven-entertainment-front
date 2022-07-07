@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { ThreeDots } from 'react-loader-spinner';
 import UserContext from '../shared/userContext';
+import { saveSession } from '../shared/loginPermanence';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -27,6 +28,7 @@ function Login() {
             .then(res => {
                 setToken(res.data.token);
                 setUsername(res.data.username);
+                saveSession(res.data.token);
                 navigate('/');
             })
             .catch(err => {
