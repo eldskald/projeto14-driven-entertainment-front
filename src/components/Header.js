@@ -14,9 +14,13 @@ export default function Header({children, isLogin}){
            <ion-icon name="person-circle-outline"></ion-icon>
            {children}
            </User>
-           <Link to={'/chart'}> <Chart src={chart}/> </Link>
+           <ChartDiv>
+            <Link to={'/chart'}> <Chart src={chart}/> </Link>
+            Carrinho
+           </ChartDiv>
            <Logout isLogin={isLogin}>
             <ion-icon  name="log-out-outline"></ion-icon>
+            Sair
            </Logout>
            
         </HeaderStyle>
@@ -38,12 +42,22 @@ const User=styled.div`
     }
 `;
 
+const ChartDiv=styled.div`
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    justify-content:center;
+    align-items:center;
+`;
+
 const Logout=styled.div`
     display:${props=>props.isLogin ? 'flex': 'none' };
     > ion-icon {
         font-size:46px;
     }
-    
+    flex-direction:column;
+    height:100%;
+    justify-content:center;
+    align-items:center;  
 `;
-
 

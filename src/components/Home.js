@@ -6,8 +6,6 @@ import Header from './Header.js';
 
 function Home() {
     const { username } = useContext(UserContext);
-
-    
     
     return (
           
@@ -34,9 +32,7 @@ height:100%;
     text-decoration:none;
     color:var(--darkcolor);
 }
->br{
-    height:10%;
-}
+
 `
 
 export default Home;
