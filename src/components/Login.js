@@ -25,7 +25,6 @@ function Login() {
         const body = { email, password };
         axios.post(`${API_URL}/login`, body)
             .then(res => {
-                console.log(res.data.token);
                 setToken(res.data.token);
                 setUsername(res.data.username);
                 navigate('/');

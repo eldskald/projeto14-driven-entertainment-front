@@ -21,8 +21,13 @@ function SignUp() {
     function handleSubmit(event) {
         event.preventDefault();
 
+        if (password !== passwordConfirm) {
+            setError('Passwords do not match!');
+            return;
+        }
+
         setSubmitting('loading');
-        const body = { name, email, password, passwordConfirm };
+        const body = { name, email, password };
         axios.post(`${API_URL}/signup`, body)
             .then(() => {navigate('/login')})
             .catch(err => {
