@@ -5,6 +5,7 @@ import { loadSession } from '../shared/loginPermanence';
 import Home from './Home';
 import Login from './Login';
 import SignUp from './SignUp';
+import Chart from './Chart';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                     <Route path='/' element={<Home />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/sign-up' element={<SignUp />} />
+                    <Route path='/chart' element={<Chart />} />
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
