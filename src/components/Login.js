@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { ThreeDots } from 'react-loader-spinner';
 import UserContext from '../shared/userContext';
 import { saveSession } from '../shared/loginPermanence';
+import HeaderStyle from '../assets/styles/HeaderStyle.js';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -58,9 +59,9 @@ function Login() {
 
     return (
         <>
-            <Header onClick={() => navigate('/')}>
+            <HeaderStyle onClick={() => navigate('/')}>
                 <p>Driven<br/>Entertainment</p>
-            </Header>
+            </HeaderStyle>
             <Container>
                 <Title>Login</Title>
                 <Form onSubmit={handleSubmit}>
@@ -89,28 +90,6 @@ function Login() {
 
     );
 }
-
-const Header = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 160px;
-    top: 0px;
-    left: 0px;
-
-    padding: 0px 32px;
-    display: flex;
-    align-items: center;
-
-    background-color: var(--brightcolor);
-    box-shadow: 0px 4px 4px #c0c0c0;
-    cursor: pointer;
-
-    > p {
-        font-family: var(--displayfont);
-        font-size: 50px;
-        color: var(--maincolor);
-    }
-`;
 
 const Container = styled.div`
     width: 1000px;
