@@ -29,17 +29,17 @@ const HeaderStyle = styled.div`
     }
 
     @media(max-width: 660px) {
-        font-size: 15px;
+        font-size: 10px;
         height: 100px;
         >p{
-        font-size: 20px;
+        font-size: 14px;
         }
         > div  ion-icon, > ion-icon{
-        font-size:30px;
+        font-size:22px;
         }
-        > a > img{
-            height:30px;
-            width:32px;
+        > div > a > img{
+            height:20px;
+            width:22px;
         }
     }
     
