@@ -1,12 +1,14 @@
+import { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HeaderStyle from "../assets/styles/HeaderStyle.js";
 import chart from "../assets/images/chart.png";
-
+import ChartContext from '../shared/chartContext.js';
 
 
 export default function Header({children, isLogin}){
     const navigate=useNavigate();
+    const {countProductsSelected}=useContext(ChartContext);
     return (
         <HeaderStyle>
            <p onClick={()=>navigate('/')}>Driven<br/>Entertainment</p>
@@ -15,6 +17,7 @@ export default function Header({children, isLogin}){
            {children}
            </User>
            <ChartDiv>
+            <span>{countProductsSelected}</span>
             <Link to={'/chart'}> <Chart src={chart}/> </Link>
             Carrinho
            </ChartDiv>
@@ -48,6 +51,20 @@ const ChartDiv=styled.div`
     height:100%;
     justify-content:center;
     align-items:center;
+    position:relative;
+    > span{
+        position:absolute;
+        background-color:var(--maincolor);
+        width:50%;
+        top:10px;
+        right:5px;
+        color:var(--brightcolor);
+        border-radius:50%;
+        aspect-ratio:1;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
 `;
 
 const Logout=styled.div`
