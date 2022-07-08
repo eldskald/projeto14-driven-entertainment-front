@@ -14,7 +14,6 @@ export function endSession(setToken, setUsername) {
 
 export function loadSession(setToken, setUsername) {
     const data = localStorage.getItem('sessionToken');
-    console.log(data);
     if (!data) {
         return;
     }

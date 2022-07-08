@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { BallTriangle } from 'react-loader-spinner';
 import UserContext from '../shared/userContext';
 import Header from './Header.js';
-import Loading from '../assets/styles/Loading.js';
+import Loading from '../styles/Loading.js';
 
 function Home() {
     const { username, token } = useContext(UserContext);
@@ -77,15 +77,7 @@ function Home() {
                         </Loading>
                         :
                         <>
-                            <Header isLogin={Boolean(username)}>
-                                { username ? `Bom dia, ${username}!` :
-                                <AuthLegend> 
-                                    <p>Bem vindo :) 
-                                        <br/>
-                                        <Link to={'/login'}>{'Entre'}</Link> ou <Link to={'/sign-up'}>{'cadastre-se'}</Link>
-                                    </p>
-                                </AuthLegend>  }
-                            </Header>
+                            <Header />
                             <Container>
                                 <ContentProduct>
                                     Para você

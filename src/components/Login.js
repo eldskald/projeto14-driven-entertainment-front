@@ -2,10 +2,13 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { ThreeDots } from 'react-loader-spinner';
 import UserContext from '../shared/userContext';
 import { saveSession } from '../shared/loginPermanence';
-import HeaderStyle from '../assets/styles/HeaderStyle.js';
+
+import MinorHeader from '../styles/MinorHeader';
+import TextInput from '../styles/TextInput.js';
+import SubmitButton from '../styles/SubmitButton.js';
+import ErrorMessage from '../styles/ErrorMessage.js';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -38,30 +41,9 @@ function Login() {
             });
     }
 
-    function SubmitButton({ text, loading }) {
-        return (
-            <SubmitButtonStyle loading={loading} disabled={loading}>
-                {loading ? (
-                    <ThreeDots color='var(--brightcolor)' />
-                ) : (
-                    text
-                )}
-            </SubmitButtonStyle>
-        )
-    }
-
-    function ErrorMessage({ error }) {
-        if (error) {
-            return <Message>{error}</Message>;
-        }
-        return <></>;
-    }
-
     return (
         <>
-            <HeaderStyle onClick={() => navigate('/')}>
-                <p>Driven<br/>Entertainment</p>
-            </HeaderStyle>
+            <MinorHeader />
             <Container>
                 <Title>Login</Title>
                 <Form onSubmit={handleSubmit}>
@@ -92,8 +74,8 @@ function Login() {
 }
 
 const Container = styled.div`
-    width: 1000px;
-    margin: 256px auto 0px auto;
+    width: 800px;
+    margin: 160px auto 0px auto;
 
     padding: 0px 32px;
     display: flex;
@@ -101,9 +83,8 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    @media(max-width: 1000px) {
+    @media(max-width: 800px) {
         width: 100%;
-        margin: 200px auto 0px auto;
     }
 `;
 
@@ -127,54 +108,6 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-const TextInput = styled.input`
-    width: 100%;
-    height: 42px;
-    margin: 8px 0px;
-    padding-left: 16px;
-    border: 1px solid var(--darkcolor);
-    border-radius: 8px;
-    outline: none;
-    background-color: var(--brightcolor);
-    font-size: 20px;
-    color: var(--darkcolor);
-    :placeholder {
-        color: var(--graycolor);
-    }
-    :disabled {
-        background-color: var(--graycolor);
-    }
-`;
-
-const SubmitButtonStyle = styled.button`
-    width: 100%;
-    height: 42px;
-    margin: 8px 0px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: 1px solid transparent;
-    border-radius: 8px;
-    background-color: var(--maincolor);
-    cursor: ${props => props.loading ? "default" : "pointer"};
-    opacity: ${props => props.loading ? 0.4 : 1};
-
-    font-family: var(--scriptfont);
-    font-weight: 500;
-    font-size: 20px;
-    color: var(--brightcolor);
-    text-align: center;
-`;
-
-const Message = styled.div`
-    margin: 4px;
-    font-family: var(--scriptfont);
-    font-size: 20px;
-    color: var(--errcolor);
 `;
 
 const LinkButton = styled.div`

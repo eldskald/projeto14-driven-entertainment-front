@@ -14,7 +14,6 @@ const HeaderStyle = styled.div`
 
     background-color: var(--brightcolor);
     box-shadow: 0px 4px 4px #c0c0c0;
-    cursor: pointer;
 
     font-size: 18px;
 
@@ -22,8 +21,9 @@ const HeaderStyle = styled.div`
         font-family: var(--displayfont);
         font-size: 50px;
         color: var(--maincolor);
-        
+        cursor: pointer;
     }
+
     > div > ion-icon, > ion-icon{
         font-size:46px;
     }
@@ -31,12 +31,15 @@ const HeaderStyle = styled.div`
     @media(max-width: 660px) {
         font-size: 10px;
         height: 100px;
-        >p{
-        font-size: 14px;
+
+        > p {
+            font-size: 14px;
         }
+
         > div  ion-icon, > ion-icon{
-        font-size:22px;
+            font-size:22px;
         }
+        
         > div > a > img{
             height:20px;
             width:22px;
