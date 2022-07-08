@@ -23,7 +23,6 @@ const SubmitButtonStyle = styled.button`
     justify-content: center;
     align-items: center;
 
-    border: 1px solid transparent;
     border-radius: 8px;
     background-color: var(--maincolor);
     cursor: ${props => props.loading ? 'default' : 'pointer'};

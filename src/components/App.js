@@ -13,7 +13,7 @@ function App() {
 
     const [token, setToken] = useState('');
     const [username, setUsername] = useState('');
-    const [countProductsSelected, setCountProducts]=useState(0);
+    const [shoppingCart, setShoppingCart]=useState([]);
 
     useEffect(() => {
         loadSession(setToken, setUsername);
@@ -24,7 +24,7 @@ function App() {
             token, setToken, username, setUsername
         }}>
             <CartContext.Provider value={{
-                countProductsSelected, setCountProducts
+                shoppingCart, setShoppingCart
             }}>
                 <BrowserRouter>
                     <Routes>

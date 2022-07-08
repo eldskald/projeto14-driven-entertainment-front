@@ -8,7 +8,7 @@ import { endSession } from '../shared/loginPermanence.js';
 export default function Header() {
 
     const navigate = useNavigate();
-    const { countProductsSelected } = useContext(CartContext);
+    const { shoppingCart } = useContext(CartContext);
     const { username, setToken, setUsername } = useContext(UserContext);
 
     const [popup, setPopup] = useState('');
@@ -48,7 +48,7 @@ export default function Header() {
                     <RightContainer>
                         <CartContainer onClick={() => navigate('/cart')}>
                             <ion-icon name='cart-outline'></ion-icon>
-                            <span>{countProductsSelected}</span>
+                            <span>{shoppingCart.length}</span>
                         </CartContainer>
                         <User>
                             <ion-icon name="person-circle-outline"></ion-icon>

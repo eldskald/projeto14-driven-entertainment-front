@@ -1,6 +1,7 @@
 :root {
     --displayfont: 'Righteous', cursive;
     --scriptfont: 'Roboto', sans-serif;
+    --headerfont: 'Bebas Neue', cursive;
     --maincolor: #ff4791;
     --brightcolor: #ffffff;
     --graycolor: #808080;

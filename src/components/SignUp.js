@@ -4,9 +4,11 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import MinorHeader from '../styles/MinorHeader.js';
+import Title from '../styles/Title.js';
 import TextInput from '../styles/TextInput.js';
 import SubmitButton from '../styles/SubmitButton.js';
 import ErrorMessage from '../styles/ErrorMessage.js';
+import LinkButton from '../styles/LinkButton.js';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -102,35 +104,12 @@ const Container = styled.div`
     }
 `;
 
-const Title = styled.div`
-    width: 100%;
-    height: 64px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: var(--scriptfont);
-    font-size: 52px;
-    font-weight: 500;
-    color: var(--darkcolor);
-`;
-
 const Form = styled.form`
     width: 100%;
     
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-const LinkButton = styled.div`
-    margin: 32px 0px;
-    cursor: pointer;
-    font-family: var(--scriptfont);
-    font-size: 20px;
-    color: var(--maincolor);
-    text-decoration: underline;
 `;
 
 export default SignUp;

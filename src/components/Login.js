@@ -6,9 +6,11 @@ import UserContext from '../shared/userContext';
 import { saveSession } from '../shared/loginPermanence';
 
 import MinorHeader from '../styles/MinorHeader';
+import Title from '../styles/Title';
 import TextInput from '../styles/TextInput.js';
 import SubmitButton from '../styles/SubmitButton.js';
 import ErrorMessage from '../styles/ErrorMessage.js';
+import LinkButton from '../styles/LinkButton';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -83,23 +85,9 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    @media(max-width: 800px) {
+    @media (max-width: 800px) {
         width: 100%;
     }
-`;
-
-const Title = styled.div`
-    width: 100%;
-    height: 64px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: var(--scriptfont);
-    font-size: 52px;
-    font-weight: 500;
-    color: var(--darkcolor);
 `;
 
 const Form = styled.form`
@@ -108,15 +96,6 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-const LinkButton = styled.div`
-    margin: 32px 0px;
-    cursor: pointer;
-    font-family: var(--scriptfont);
-    font-size: 20px;
-    color: var(--maincolor);
-    text-decoration: underline;
 `;
 
 export default Login;
