@@ -79,42 +79,42 @@ function Home() {
                         :
                         <>
                             <Header />
-                            <Container>
-                                <Title>For you</Title>
-                                <ContentProduct>
-                                    
-                                    <ProductsDiv>
-                                        {relatedProducts.map(prod=>{
-                                            return (
-                                                <IndividualContent onClick={()=>console.log(prod)} key={prod._id}>
-                                                    <Thumbnail artUrl={prod.image} />
-                                                    <p>{prod.name}</p>
-                                                    <p>$ {prod.price.toFixed(2)}</p>
-                                                </IndividualContent>
-                                            );
-                                        })}
-                                    </ProductsDiv>
-                            
-                                </ContentProduct>
-                                
-                                <Title>Top Sellers</Title>
-                                <ContentProduct>
-                                    
-                                    <ProductsDiv>
-                                        {moreSalesProducts.map(prod=>{
-                                            return (
-                                                <IndividualContent onClick={()=>console.log(prod)} key={prod._id}>
-                                                    <Thumbnail artUrl={prod.image} />
-                                                    <p>{prod.name}</p>
-                                                    <p>$ {prod.price.toFixed(2)}</p>
-                                                </IndividualContent>
-                                            );
-                                        })}
-                                    </ProductsDiv>
-                            
-                                </ContentProduct>
-
-                            </Container>
+                            <OuterContainer>
+                                <InnerContainer>
+                                    <TitleContainer>
+                                        <Title>For you</Title>
+                                    </TitleContainer>
+                                    <ContentProduct>
+                                        <ProductsDiv>
+                                            {relatedProducts.map(prod=>{
+                                                return (
+                                                    <IndividualContent onClick={()=>console.log(prod)} key={prod._id}>
+                                                        <Thumbnail artUrl={prod.image} />
+                                                        <p>{prod.name}</p>
+                                                        <p>$ {prod.price.toFixed(2)}</p>
+                                                    </IndividualContent>
+                                                );
+                                            })}
+                                        </ProductsDiv>
+                                    </ContentProduct>
+                                    <TitleContainer>
+                                        <Title>Top sellers</Title>
+                                    </TitleContainer>
+                                    <ContentProduct>
+                                        <ProductsDiv>
+                                            {moreSalesProducts.map(prod=>{
+                                                return (
+                                                    <IndividualContent onClick={()=>console.log(prod)} key={prod._id}>
+                                                        <Thumbnail artUrl={prod.image} />
+                                                        <p>{prod.name}</p>
+                                                        <p>$ {prod.price.toFixed(2)}</p>
+                                                    </IndividualContent>
+                                                );
+                                            })}
+                                        </ProductsDiv>
+                                    </ContentProduct>
+                                </InnerContainer>
+                            </OuterContainer>
                         </>
                         }
                     </>
@@ -128,33 +128,39 @@ function Home() {
     
     return (
         <>
-         
             {renderPageHomeScreen}
-            
-       </>
+        </>
     );
 }
 
-const Container = styled.div`
-    width: 100%;
-    min-height:100vh;
-    margin: 160px auto 0px auto;
+const OuterContainer = styled.div`
+    position: absolute;
+    top: 112px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
 
-    padding: 0px 32px;
+    display: flex;
+    justify-content: center;
+`;
+
+const InnerContainer = styled.div`
+    width: 1200px;
+    height: 100%;
+
+    padding: 32px 32px 0px 32px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 
-    background-color:#EFEFEF;
-    font-size:25px;
+    @media (max-width: 1200px) {
+        width: 100%;
+        padding: 32px 0px 0px 0px;
+    }
+`;
 
-    @media(max-width: 660px) {
-        margin: 100px auto 0px auto;
-        font-size: 15px;
-        > div{
-            margin-top:20px;
-            font-size: 30px;
-        }
+const TitleContainer = styled.div`
+    @media (max-width: 1200px) {
+        padding: 0px 32px;
     }
 `;
 
@@ -164,7 +170,7 @@ const ContentProduct=styled.div`
     border-radius: 32px;
     box-shadow: 0px 0px 16px #c0c0c0;
     border: 1px solid var(--graycolor);
-    background-color:#ffffff;
+    background-color: var(--brightcolor);
     display:flex;
     flex-wrap:wrap;
     flex-grow: 1;
