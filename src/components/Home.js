@@ -1,11 +1,12 @@
 import { useEffect,useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { BallTriangle } from 'react-loader-spinner';
 import UserContext from '../shared/userContext';
 import Header from './Header.js';
 import Loading from '../styles/Loading.js';
+import Title from '../styles/Title';
+import Thumbnail from '../styles/Thumbnail';
 
 function Home() {
     const { username, token } = useContext(UserContext);
@@ -79,31 +80,33 @@ function Home() {
                         <>
                             <Header />
                             <Container>
+                                <Title>For you</Title>
                                 <ContentProduct>
-                                    Para você
+                                    
                                     <ProductsDiv>
                                         {relatedProducts.map(prod=>{
                                             return (
                                                 <IndividualContent onClick={()=>console.log(prod)} key={prod._id}>
-                                                    <img src={prod.image} alt='Product of a content that can be bought, if you want so'/>
+                                                    <Thumbnail artUrl={prod.image} />
                                                     <p>{prod.name}</p>
-                                                    <p>R$ {prod.price.toFixed(2)}</p>
+                                                    <p>$ {prod.price.toFixed(2)}</p>
                                                 </IndividualContent>
                                             );
                                         })}
                                     </ProductsDiv>
                             
                                 </ContentProduct>
-
+                                
+                                <Title>Top Sellers</Title>
                                 <ContentProduct>
-                                    Os mais acessados
+                                    
                                     <ProductsDiv>
                                         {moreSalesProducts.map(prod=>{
                                             return (
                                                 <IndividualContent onClick={()=>console.log(prod)} key={prod._id}>
-                                                    <img src={prod.image} alt='Product of a content that can be bought, if you want so'/>
+                                                    <Thumbnail artUrl={prod.image} />
                                                     <p>{prod.name}</p>
-                                                    <p>R$ {prod.price.toFixed(2)}</p>
+                                                    <p>$ {prod.price.toFixed(2)}</p>
                                                 </IndividualContent>
                                             );
                                         })}
@@ -128,22 +131,9 @@ function Home() {
          
             {renderPageHomeScreen}
             
-        </>
-
-        
+       </>
     );
 }
-
-const AuthLegend = styled.div `
-display:flex;
-align-items:center;
-justify-content:center;
-height:100%;
-> p a{
-    text-decoration:none;
-    color:var(--darkcolor);
-}
-`;
 
 const Container = styled.div`
     width: 100%;
@@ -156,29 +146,44 @@ const Container = styled.div`
     align-items: center;
 
     background-color:#EFEFEF;
+    font-size:25px;
 
     @media(max-width: 660px) {
         margin: 100px auto 0px auto;
+        font-size: 15px;
+        > div{
+            margin-top:20px;
+            font-size: 30px;
+        }
     }
 `;
 
 const ContentProduct=styled.div`
-    width:100%;
+    min-width:100%;
     margin:30px 0;
+    border-radius: 32px;
+    box-shadow: 0px 0px 16px #c0c0c0;
+    border: 1px solid var(--graycolor);
     background-color:#ffffff;
-    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.15); 
     display:flex;
-    flex-direction:column;
-    font-size:25px;
-    border:2px solid rgba(0,0,0,0.15);
-    @media(max-width: 660px) {
-        font-size: 15px;
+    flex-wrap:wrap;
+    flex-grow: 1;
+    overflow-x: scroll;
+
+    margin-top:16px;
+    @media (max-width: 1200px) {
+        width: 100%;
+        border-radius: 0px;
+        border-left: 0px none transparent;
+        border-right: 0px none transparent;
     }
+    
 `;
 
 const ProductsDiv=styled.div`
     width:100%;
     display:flex;
+    
 `;
 
 const IndividualContent=styled.div`
@@ -189,20 +194,22 @@ const IndividualContent=styled.div`
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    > img{
-        height:100%;
-        aspect-ratio:0.67;
-        object-fit:cover;
-    }
     > p{
-        font-size:15px;
+        font-family: var(--scriptfont);
+        font-size: 24px;
+        color: var(--darkcolor);
     }
     @media(max-width: 660px) {
         height:150px;
         >p{
             font-size:12px;
         }
+        > div{
+        width:70px;
+        height:100px;
+        }
     }
 `;
+
 
 export default Home;
