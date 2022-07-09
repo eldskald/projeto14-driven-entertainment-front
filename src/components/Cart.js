@@ -33,7 +33,7 @@ export default function Cart (){
         return (
             <ProductContainer>
                 <CoverAndTitleAndCategory>
-                    <Thumbnail artUrl={coverArt} onClick={() => navigate(`/${id}`)} />
+                    <Thumbnail artUrl={coverArt} onClick={() => navigate(`/products/${id}`)} />
                     <TitleAndCategory>
                         <h1>{title}</h1>
                         <h2>{category}</h2>
