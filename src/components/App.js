@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import UserContext from "../shared/userContext";
 import CartContext from "../shared/cartContext";
 import { loadSession } from "../shared/loginPermanence";
 import Home from "./Home";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import SelectedProduct from "./SelectedProduct";
 import SignupProducts from "./SignupProducts";
 import Cart from "./Cart";
-import axios from "axios";
-import SelectedProduct from "./Product";
+import Checkout from "./Checkout";
 
 const API_URL = process.env.REACT_APP_API_URL;
 

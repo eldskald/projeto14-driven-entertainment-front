@@ -74,10 +74,55 @@ export default function Header() {
       </OuterContainer>
       {popup ? (
         <>
-          <PopupBackground onClick={() => setPopup("")} />
-          <PopupContainer>
-            <PopupMenu />
-          </PopupContainer>
+          <OuterContainer>
+            <InnerContainer>
+              <Logo onClick={() => navigate("/")}>
+                Driven
+                <br />
+                Entertainment
+              </Logo>
+              <RightContainer>
+                <CartContainer onClick={() => navigate("/cart")}>
+                  <ion-icon name="cart-outline"></ion-icon>
+                  <span>{shoppingCart.length}</span>
+                </CartContainer>
+                <User>
+                  <ion-icon name="person-circle-outline"></ion-icon>
+                  {username ? (
+                    <AuthLegend>
+                      <div>
+                        {`Hello, ${username}!`}
+                        <br />
+                        <div onClick={logout}>Logout</div>
+                      </div>
+                    </AuthLegend>
+                  ) : (
+                    <AuthLegend>
+                      <p>
+                        {"Welcome :)"}
+                        <br />
+                        <Link to={"/login"}>Login</Link> or{" "}
+                        <Link to={"/sign-up"}>Sign up</Link>
+                      </p>
+                    </AuthLegend>
+                  )}
+                </User>
+                <MobileUserIcon onClick={() => setPopup("active")}>
+                  <ion-icon name="person-circle-outline"></ion-icon>
+                </MobileUserIcon>
+              </RightContainer>
+            </InnerContainer>
+          </OuterContainer>
+          {popup ? (
+            <>
+              <PopupBackground onClick={() => setPopup("")} />
+              <PopupContainer>
+                <PopupMenu />
+              </PopupContainer>
+            </>
+          ) : (
+            <></>
+          )}
         </>
       ) : (
         <></>
@@ -158,6 +203,23 @@ const AuthLegend = styled.div`
   }
   > p > a:hover {
     color: var(--maincolor);
+  }
+
+  > p > a {
+    margin-top: 4px;
+    text-decoration: none;
+    color: var(--darkcolor);
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--scriptfont);
+  color: var(--darkcolor);
+
+  > div > div {
+    width: fit-content;
+    margin-top: 4px;
+    cursor: pointer;
   }
 
   > p > a {

@@ -8,7 +8,7 @@ import Header from './Header';
 import Title from '../styles/Title';
 import Thumbnail from '../styles/Thumbnail';
 
-export default function Cart (){
+export default function Cart() {
 
     // O shopping cart tem que ser preenchidos com objetos
     // com a seguinte estrutura:
@@ -33,14 +33,14 @@ export default function Cart (){
         return (
             <ProductContainer>
                 <CoverAndTitleAndCategory>
-                    <Thumbnail artUrl={coverArt} onClick={() => navigate(`/products/${id}`)} />
-                    <TitleAndCategory>
+                    <Thumbnail artUrl={coverArt} onClick={() => navigate(`/${id}`)} />
+                    <TitleAndCategory onClick={() => navigate(`/${id}`)} >
                         <h1>{title}</h1>
                         <h2>{category}</h2>
-                        <h3>{price}</h3>
+                        <h3>{`$${price.toFixed(2)}`}</h3>
                     </TitleAndCategory>
                 </CoverAndTitleAndCategory>
-                <Pricetag>{price}</Pricetag>
+                <Pricetag>{`$${price.toFixed(2)}`}</Pricetag>
                 <RemoveButton>
                     <ion-icon
                         name='trash-outline'
@@ -60,6 +60,8 @@ export default function Cart (){
     function handleCheckout() {
         if (!token) {
             navigate('/login');
+        } else {
+            navigate('/checkout');
         }
     }
 
@@ -94,11 +96,14 @@ export default function Cart (){
                     </CartContainer>
                     <BottomContainer>
                         <ButtonsContainer>
-                            <ButtonStyle onClick={handleCheckout}>
+                            <ButtonStyle
+                                onClick={handleCheckout}
+                                disabled={shoppingCart.length === 0}
+                            >
                                 Checkout
                             </ButtonStyle>
                             <ButtonStyle onClick={() => navigate('/')}>
-                                Keep Buying
+                                Resume Shopping
                             </ButtonStyle>
                         </ButtonsContainer>
                         <TotalPrice>
@@ -275,6 +280,11 @@ const ButtonStyle = styled.button`
     font-size: 20px;
     color: var(--brightcolor);
     text-align: center;
+
+    :disabled {
+        opacity: 0.4;
+        cursor: default;
+    }
 `;
 
 const TotalPrice = styled.div`
