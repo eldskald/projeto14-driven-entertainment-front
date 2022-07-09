@@ -3,7 +3,7 @@ import styled from 'styled-components';
 function Thumbnail({ artUrl }) {
     return (
         <Container>
-            <img src={artUrl} />
+            <img src={artUrl} alt='Cover'/>
         </Container>
     );
 }
@@ -19,6 +19,7 @@ const Container = styled.div`
 
     border-radius: 16px;
     box-shadow: 0px 0px 4px 4px #c0c0c0;
+    cursor: pointer;
 
     > img {
         height: 100%;

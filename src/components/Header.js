@@ -54,13 +54,13 @@ export default function Header() {
                             <ion-icon name="person-circle-outline"></ion-icon>
                             { username ? (
                                 <AuthLegend>
-                                    <p>
+                                    <div>
                                         {`Hello, ${username}!`}
                                         <br/>
                                         <p onClick={logout}>
                                             Logout
                                         </p>
-                                    </p>
+                                    </div>
                                 </AuthLegend>
                             ) : (
                                 <AuthLegend> 
@@ -156,7 +156,7 @@ const AuthLegend = styled.div`
     font-family: var(--scriptfont);
     color:var(--darkcolor);
 
-    > p > p {
+    > div > p {
         margin-top: 4px;
         cursor: pointer;
     }

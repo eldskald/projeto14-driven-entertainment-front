@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserContext from '../shared/userContext';
@@ -10,15 +10,30 @@ import Thumbnail from '../styles/Thumbnail';
 
 export default function Cart (){
 
-    const navigate = useNavigate();
-    const { token, username } = useContext(UserContext);
-    const { shoppingCart } = useContext(CartContext);
+    // O shopping cart tem que ser preenchidos com objetos
+    // com a seguinte estrutura:
+    //
+    // {
+    //     prodId: <_id do produto>
+    //     name: <nome do produto>
+    //     coverUrl: <URL da imagem de capa do produto>
+    //     category: <nome da categoria>
+    //     price: <preço do produto>
+    // }
+    //
+    // É bom a gente fazer assim ao invés de só botar os _id's
+    // porque assim a gente evita fazer uma requisição extra pra
+    // API e a página do carrinho carrega mais rápido.
 
-    function Product({ coverArt, title, category, price }) {
+    const navigate = useNavigate();
+    const { token } = useContext(UserContext);
+    const { shoppingCart, setShoppingCart } = useContext(CartContext);
+
+    function Product({ id, coverArt, title, category, price, index }) {
         return (
             <ProductContainer>
                 <CoverAndTitleAndCategory>
-                    <Thumbnail artUrl={coverArt} />
+                    <Thumbnail artUrl={coverArt} onClick={() => navigate(`/${id}`)} />
                     <TitleAndCategory>
                         <h1>{title}</h1>
                         <h2>{category}</h2>
@@ -26,8 +41,34 @@ export default function Cart (){
                     </TitleAndCategory>
                 </CoverAndTitleAndCategory>
                 <Pricetag>{price}</Pricetag>
+                <RemoveButton>
+                    <ion-icon
+                        name='trash-outline'
+                        onClick={() => handleRemove(index)}
+                    ></ion-icon>
+                </RemoveButton>
             </ProductContainer>
         );
+    }
+
+    function handleRemove(index) {
+        const arr = [...shoppingCart];
+        arr.splice(index, 1);
+        setShoppingCart([...arr]);
+    }
+
+    function handleCheckout() {
+        if (!token) {
+            navigate('/login');
+        }
+    }
+
+    function getTotalPrice() {
+        let sum = 0;
+        shoppingCart.forEach(product => {
+            sum += Number(product.price);
+        });
+        return `$${sum.toFixed(2)}`;
     }
 
     return (
@@ -39,34 +80,21 @@ export default function Cart (){
                         <Title>Your shopping cart</Title>
                     </TitleContainer>
                     <CartContainer>
-                    <Product
-                        title={'Elden Ring'}
-                        category={'Video Game'}
-                        coverArt={'https://mundodrix.com.br/site/wp-content/uploads/2022/03/Elden-Ring.jpg'}
-                        price={'$59.99'}
-                    />
-                    <Product
-                        title={'Elden Ring'}
-                        category={'Video Game'}
-                        coverArt={'https://mundodrix.com.br/site/wp-content/uploads/2022/03/Elden-Ring.jpg'}
-                        price={'$59.99'}
-                    />
-                    <Product
-                        title={'Elden Ring'}
-                        category={'Video Game'}
-                        coverArt={'https://mundodrix.com.br/site/wp-content/uploads/2022/03/Elden-Ring.jpg'}
-                        price={'$59.99'}
-                    />
-                    <Product
-                        title={'Elden Ring'}
-                        category={'Video Game'}
-                        coverArt={'https://mundodrix.com.br/site/wp-content/uploads/2022/03/Elden-Ring.jpg'}
-                        price={'$59.99'}
-                    />
+                        {shoppingCart.map((product, index) => (
+                            <Product
+                                key={index}
+                                id={product.prodId}
+                                title={product.name}
+                                category={product.category}
+                                coverArt={product.coverUrl}
+                                price={`$${product.price.toFixed(2)}`}
+                                index={index}
+                            />
+                        ))}
                     </CartContainer>
                     <BottomContainer>
                         <ButtonsContainer>
-                            <ButtonStyle>
+                            <ButtonStyle onClick={handleCheckout}>
                                 Checkout
                             </ButtonStyle>
                             <ButtonStyle onClick={() => navigate('/')}>
@@ -74,7 +102,7 @@ export default function Cart (){
                             </ButtonStyle>
                         </ButtonsContainer>
                         <TotalPrice>
-                            Total:<br/>$200.00
+                            Total:<br/>{getTotalPrice()}
                         </TotalPrice>
                     </BottomContainer>
                 </Container>
@@ -138,6 +166,7 @@ const CartContainer = styled.div`
 `;
 
 const ProductContainer = styled.div`
+    position: relative;
     width: 100%;
     margin: 16px 0px;
     display: flex;
@@ -189,6 +218,22 @@ const Pricetag = styled.div`
 
     @media (max-width: 1200px) {
         display: none;
+    }
+`;
+
+const RemoveButton = styled.div`
+    position: absolute;
+    bottom: 20px;
+    right: 52px;
+    cursor: pointer;
+
+    > ion-icon {
+        font-size: 42px;
+        color: var(--darkcolor);
+    }
+
+    @media (max-width: 1200px) {
+        right: 0px;
     }
 `;
 

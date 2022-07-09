@@ -8,6 +8,9 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Products from "./Products";
 import Cart from './Cart';
+import axios from 'axios';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function App() {
 
@@ -18,6 +21,16 @@ function App() {
     useEffect(() => {
         loadSession(setToken, setUsername);
     }, []);
+
+    useEffect(() => {
+        if (!token) {
+            return;
+        }
+        axios.put(`${API_URL}/cart`, shoppingCart, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }})
+    }, [shoppingCart]);
 
     return (
         <UserContext.Provider value={{
@@ -32,7 +45,7 @@ function App() {
                         <Route path='/login' element={<Login />} />
                         <Route path='/sign-up' element={<SignUp />} />
                         <Route path='/cart' element={<Cart />} />
-                        <Route path="/signup-products" element={<Products />} />
+                        <Route path='/signup-products' element={<Products />} />
                     </Routes>
                 </BrowserRouter>
             </CartContext.Provider>
