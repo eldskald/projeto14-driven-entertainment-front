@@ -33,8 +33,8 @@ export default function Cart() {
         return (
             <ProductContainer>
                 <CoverAndTitleAndCategory>
-                    <Thumbnail artUrl={coverArt} onClick={() => navigate(`/products/${id}`)} />
-                    <TitleAndCategory onClick={() => navigate(`/products/${id}`)} >
+                    <Thumbnail artUrl={coverArt} onClick={() => navigate(`/${id}`)} />
+                    <TitleAndCategory onClick={() => navigate(`/${id}`)} >
                         <h1>{title}</h1>
                         <h2>{category}</h2>
                         <h3>{`$${price.toFixed(2)}`}</h3>
@@ -60,8 +60,9 @@ export default function Cart() {
     function handleCheckout() {
         if (!token) {
             navigate('/login');
+        } else {
+            navigate('/checkout');
         }
-        navigate('/checkout');
     }
 
     function getTotalPrice() {
@@ -95,11 +96,14 @@ export default function Cart() {
                     </CartContainer>
                     <BottomContainer>
                         <ButtonsContainer>
-                            <ButtonStyle onClick={handleCheckout}>
+                            <ButtonStyle
+                                onClick={handleCheckout}
+                                disabled={shoppingCart.length === 0}
+                            >
                                 Checkout
                             </ButtonStyle>
                             <ButtonStyle onClick={() => navigate('/')}>
-                                Keep Buying
+                                Resume Shopping
                             </ButtonStyle>
                         </ButtonsContainer>
                         <TotalPrice>
@@ -276,6 +280,11 @@ const ButtonStyle = styled.button`
     font-size: 20px;
     color: var(--brightcolor);
     text-align: center;
+
+    :disabled {
+        opacity: 0.4;
+        cursor: default;
+    }
 `;
 
 const TotalPrice = styled.div`

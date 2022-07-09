@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -6,13 +6,20 @@ import UserContext from '../shared/userContext';
 import CartContext from '../shared/cartContext';
 
 import Header from './Header';
-import Title from '../styles/Title';
 
 function Checkout() {
 
     const navigate = useNavigate();
     const { token } = useContext(UserContext);
     const { shoppingCart } = useContext(CartContext);
+
+    const [popup, setPopup] = useState('');
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/login');
+        }
+    })
     
     function Product({ id, title, price }) {
         return (

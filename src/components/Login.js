@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import UserContext from '../shared/userContext';
+import CartContext from '../shared/cartContext';
 import { saveSession } from '../shared/loginPermanence';
 
 import MinorHeader from '../styles/MinorHeader';
@@ -17,6 +18,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 function Login() {
 
     const { setToken, setUsername } = useContext(UserContext);
+    const { shoppingCart, setShoppingCart } = useContext(CartContext);
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -35,7 +37,16 @@ function Login() {
                 setToken(res.data.token);
                 setUsername(res.data.username);
                 saveSession(res.data.token);
-                navigate('/');
+                axios.get(`${API_URL}/cart`, {
+                    headers: {
+                        Authorization: `Bearer ${res.data.token}`
+                }})
+                    .then(res2 => {
+                        const aux = [...shoppingCart, ...res2.data];
+                        setShoppingCart([...new Set(aux)]);
+                        navigate('/');
+                    })
+                    .catch(() => {navigate('/')});
             })
             .catch(err => {
                 setError(err.response.data);

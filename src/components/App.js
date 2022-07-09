@@ -30,7 +30,7 @@ function App() {
         axios.put(`${API_URL}/cart`, shoppingCart, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }})
+        }});
     }, [shoppingCart]);
 
     return (
