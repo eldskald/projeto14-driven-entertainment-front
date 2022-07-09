@@ -9,11 +9,26 @@ import Title from '../styles/Title';
 import Thumbnail from '../styles/Thumbnail';
 
 function Home() {
+
+    // O shopping cart tem que ser preenchidos com objetos
+    // com a seguinte estrutura:
+    //
+    // {
+    //     prodId: <_id do produto>
+    //     name: <nome do produto>
+    //     coverUrl: <URL da imagem de capa do produto>
+    //     category: <nome da categoria>
+    //     price: <preço do produto>
+    // }
+    //
+    // É bom a gente fazer assim ao invés de só botar os _id's
+    // porque assim a gente evita fazer uma requisição extra pra
+    // API e a página do carrinho carrega mais rápido.
+
     const { username, token } = useContext(UserContext);
     const [relatedProducts,setRelatedProducts]=useState(null);
     const [moreSalesProducts, setMoreSalesProducts]=useState(null)
     const [loading,setLoading]=useState(true);
-
 
     useEffect(()=>{
         setLoading(true);
@@ -139,7 +154,7 @@ const OuterContainer = styled.div`
     bottom: 0px;
     left: 0px;
     right: 0px;
-    
+
     display: flex;
     justify-content: center;
 `;
@@ -147,6 +162,7 @@ const OuterContainer = styled.div`
 const InnerContainer = styled.div`
     width: 1200px;
     height: 100%;
+
     padding: 32px 32px 0px 32px;
     display: flex;
     flex-direction: column;
@@ -170,7 +186,6 @@ const ContentProduct=styled.div`
     box-shadow: 0px 0px 16px #c0c0c0;
     border: 1px solid var(--graycolor);
     background-color: var(--brightcolor);
-    min-height: 250px;
     display:flex;
     flex-wrap:wrap;
     flex-grow: 1;
@@ -182,9 +197,6 @@ const ContentProduct=styled.div`
         border-radius: 0px;
         border-left: 0px none transparent;
         border-right: 0px none transparent;
-    }
-    @media (max-width: 660px) {
-        min-height: 180px;
     }
     
 `;
