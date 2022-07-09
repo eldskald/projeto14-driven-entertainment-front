@@ -57,9 +57,9 @@ export default function Header() {
                                     <div>
                                         {`Hello, ${username}!`}
                                         <br/>
-                                        <p onClick={logout}>
+                                        <div onClick={logout}>
                                             Logout
-                                        </p>
+                                        </div>
                                     </div>
                                 </AuthLegend>
                             ) : (
@@ -156,7 +156,8 @@ const AuthLegend = styled.div`
     font-family: var(--scriptfont);
     color:var(--darkcolor);
 
-    > div > p {
+    > div > div {
+        width: fit-content;
         margin-top: 4px;
         cursor: pointer;
     }

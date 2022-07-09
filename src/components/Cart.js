@@ -8,7 +8,7 @@ import Header from './Header';
 import Title from '../styles/Title';
 import Thumbnail from '../styles/Thumbnail';
 
-export default function Cart (){
+export default function Cart() {
 
     // O shopping cart tem que ser preenchidos com objetos
     // com a seguinte estrutura:
@@ -34,13 +34,13 @@ export default function Cart (){
             <ProductContainer>
                 <CoverAndTitleAndCategory>
                     <Thumbnail artUrl={coverArt} onClick={() => navigate(`/products/${id}`)} />
-                    <TitleAndCategory>
+                    <TitleAndCategory onClick={() => navigate(`/products/${id}`)} >
                         <h1>{title}</h1>
                         <h2>{category}</h2>
-                        <h3>{price}</h3>
+                        <h3>{`$${price.toFixed(2)}`}</h3>
                     </TitleAndCategory>
                 </CoverAndTitleAndCategory>
-                <Pricetag>{price}</Pricetag>
+                <Pricetag>{`$${price.toFixed(2)}`}</Pricetag>
                 <RemoveButton>
                     <ion-icon
                         name='trash-outline'
@@ -61,6 +61,7 @@ export default function Cart (){
         if (!token) {
             navigate('/login');
         }
+        navigate('/checkout');
     }
 
     function getTotalPrice() {

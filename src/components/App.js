@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 import UserContext from '../shared/userContext';
 import CartContext from '../shared/cartContext';
 import { loadSession } from '../shared/loginPermanence';
@@ -8,7 +9,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Products from "./Products";
 import Cart from './Cart';
-import axios from 'axios';
+import Checkout from './Checkout';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -45,6 +46,7 @@ function App() {
                         <Route path='/login' element={<Login />} />
                         <Route path='/sign-up' element={<SignUp />} />
                         <Route path='/cart' element={<Cart />} />
+                        <Route path='/checkout' element={<Checkout />} />
                         <Route path='/signup-products' element={<Products />} />
                     </Routes>
                 </BrowserRouter>
