@@ -1,3 +1,4 @@
+import Header from "./Header";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,7 +6,7 @@ import styled from "styled-components";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export default function Products() {
+export default function SignupProducts() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDesc] = useState("");
@@ -39,13 +40,7 @@ export default function Products() {
 
   return (
     <>
-      <Header onClick={() => navigate("/")}>
-        <p>
-          Driven
-          <br />
-          Entertainment
-        </p>
-      </Header>
+      <Header />
       <Container>
         <Title>SignUp a Product</Title>
         <Form>
@@ -111,31 +106,10 @@ export default function Products() {
   );
 }
 
-const Header = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 160px;
-  top: 0px;
-  left: 0px;
-
-  padding: 0px 32px;
-  display: flex;
-  align-items: center;
-
-  background-color: var(--brightcolor);
-  box-shadow: 0px 4px 4px #c0c0c0;
-  cursor: pointer;
-
-  > p {
-    font-family: var(--displayfont);
-    font-size: 50px;
-    color: var(--maincolor);
-  }
-`;
 const Container = styled.div`
   padding: 0px 32px;
   width: 1000px;
-  margin: 256px auto 0px auto;
+  margin: 156px auto 0px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
