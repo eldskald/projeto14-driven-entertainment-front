@@ -16,6 +16,8 @@ export default function SignupProducts() {
   const [subcategory, setSubcattegory] = useState([]);
   const [producer, setProducer] = useState("");
   const [releaseDate, setRealeasedate] = useState("");
+  const [trailer, setTrailer] = useState("");
+  const [ratingsUrl, setRatingsUrl] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,7 +28,9 @@ export default function SignupProducts() {
       price: parseFloat(price),
       description,
       rating,
+      ratingsUrl,
       image,
+      trailer,
       category,
       subcategory: subcategory.split(","),
       producer,
@@ -98,6 +102,18 @@ export default function SignupProducts() {
             placeholder="rate"
             value={rating}
             onChange={(e) => setRate(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="rating URL"
+            value={ratingsUrl}
+            onChange={(e) => setRatingsUrl(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="trailer"
+            value={trailer}
+            onChange={(e) => setTrailer(e.target.value)}
           />
         </Form>
         <SubmitButtonStyle onClick={handleSubmit}>Cadastrar</SubmitButtonStyle>
