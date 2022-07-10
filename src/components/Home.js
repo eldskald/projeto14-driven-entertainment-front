@@ -25,8 +25,8 @@ function Home() {
   // API e a página do carrinho carrega mais rápido.
 
   const { token } = useContext(UserContext);
-  const [relatedProducts, setRelatedProducts] = useState(null);
-  const [moreSalesProducts, setMoreSalesProducts] = useState(null);
+  const [newProducts, setnewProducts] = useState(null);
+  const [topRatedProducts, setTopRatedProducts] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,25 +42,25 @@ function Home() {
       };
     }
 
-    const promiseRecomendedProducts = axios.get(
+    const promiseNewRealsesProducts = axios.get(
       `${process.env.REACT_APP_API_URL}/productsNewReleases`,
       config
     );
-    promiseRecomendedProducts.then((res) => {
+    promiseNewRealsesProducts.then((res) => {
       setLoading(false);
-      setRelatedProducts(res.data);
+      setnewProducts(res.data);
     });
-    promiseRecomendedProducts.catch((err) => {
+    promiseNewRealsesProducts.catch((err) => {
       setLoading(false);
       console.log(err.response.data);
     });
 
     const promiseMoreSalesProducts = axios.get(
-      `${process.env.REACT_APP_API_URL}/productsNewReleases`
+      `${process.env.REACT_APP_API_URL}/productsTopRated`
     );
     promiseMoreSalesProducts.then((res) => {
       setLoading(false);
-      setMoreSalesProducts(res.data);
+      setTopRatedProducts(res.data);
     });
     promiseMoreSalesProducts.catch((err) => {
       setLoading(false);
@@ -69,7 +69,7 @@ function Home() {
   }, [token]);
 
   function HomeScreenContent() {
-    if (!relatedProducts || !moreSalesProducts) {
+    if (!newProducts || !topRatedProducts) {
       return (
         <Loading>
           <BallTriangle
@@ -100,11 +100,11 @@ function Home() {
               <OuterContainer>
                 <InnerContainer>
                   <TitleContainer>
-                    <Title>For you</Title>
+                    <Title>New Releases</Title>
                   </TitleContainer>
                   <ContentProduct>
                     <ProductsDiv>
-                      {relatedProducts.map((prod) => {
+                      {newProducts.map((prod) => {
                         return (
                           <IndividualContent
                             onClick={() => console.log(prod)}
@@ -119,11 +119,11 @@ function Home() {
                     </ProductsDiv>
                   </ContentProduct>
                   <TitleContainer>
-                    <Title>Top sellers</Title>
+                    <Title>Top Rated</Title>
                   </TitleContainer>
                   <ContentProduct>
                     <ProductsDiv>
-                      {moreSalesProducts.map((prod) => {
+                      {topRatedProducts.map((prod) => {
                         return (
                           <IndividualContent
                             onClick={() => console.log(prod)}
