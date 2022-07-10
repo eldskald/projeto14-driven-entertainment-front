@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../shared/userContext";
 import CartContext from "../shared/cartContext";
-import { loadSession } from "../shared/loginPermanence";
+import { loadSession, endSession } from "../shared/loginPermanence";
 import Home from "./Home";
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -17,6 +17,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 function App() {
     const [token, setToken] = useState("");
     const [username, setUsername] = useState("");
+    const [library, setLibrary] = useState([]);
     const [shoppingCart, setShoppingCart] = useState([]);
 
     useEffect(() => {
@@ -27,10 +28,23 @@ function App() {
         if (!token) {
             return;
         }
+        axios.get('/library', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        })
+            .then(res => setLibrary(res.data))
+            .catch(() => endSession());
+    }, [token])
+
+    useEffect(() => {
+        if (!token) {
+            return;
+        }
         axios.put(`${API_URL}/cart`, shoppingCart, {
             headers: {
                 Authorization: `Bearer ${token}`,
-            },
+            }
         });
     }, [shoppingCart]);
 
@@ -41,12 +55,14 @@ function App() {
                 setToken,
                 username,
                 setUsername,
+                library,
+                setLibrary
             }}
         >
             <CartContext.Provider
                 value={{
                     shoppingCart,
-                    setShoppingCart,
+                    setShoppingCart
                 }}
             >
                 <BrowserRouter>

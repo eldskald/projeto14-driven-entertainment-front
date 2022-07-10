@@ -107,7 +107,7 @@ export default function Cart() {
                             </ButtonStyle>
                         </ButtonsContainer>
                         <TotalPrice>
-                            Total:<br/>{getTotalPrice()}
+                            Total:<br />{getTotalPrice()}
                         </TotalPrice>
                     </BottomContainer>
                 </Container>

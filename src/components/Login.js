@@ -42,8 +42,9 @@ function Login() {
                         Authorization: `Bearer ${res.data.token}`
                 }})
                     .then(res2 => {
-                        const aux = [...shoppingCart, ...res2.data];
-                        setShoppingCart([...new Set(aux)]);
+                        if (shoppingCart.length === 0) {
+                            setShoppingCart([...res2.data]);
+                        }
                         navigate('/');
                     })
                     .catch(() => {navigate('/')});
