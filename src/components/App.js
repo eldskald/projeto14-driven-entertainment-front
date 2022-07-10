@@ -15,53 +15,54 @@ import Checkout from "./Checkout";
 const API_URL = process.env.REACT_APP_API_URL;
 
 function App() {
-  const [token, setToken] = useState("");
-  const [username, setUsername] = useState("");
-  const [shoppingCart, setShoppingCart] = useState([]);
+    const [token, setToken] = useState("");
+    const [username, setUsername] = useState("");
+    const [shoppingCart, setShoppingCart] = useState([]);
 
-  useEffect(() => {
-    loadSession(setToken, setUsername);
-  }, []);
+    useEffect(() => {
+        loadSession(setToken, setUsername);
+    }, []);
 
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
-    axios.put(`${API_URL}/cart`, shoppingCart, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  }, [shoppingCart]);
+    useEffect(() => {
+        if (!token) {
+            return;
+        }
+        axios.put(`${API_URL}/cart`, shoppingCart, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }, [shoppingCart]);
 
-  return (
-    <UserContext.Provider
-      value={{
-        token,
-        setToken,
-        username,
-        setUsername,
-      }}
-    >
-      <CartContext.Provider
-        value={{
-          shoppingCart,
-          setShoppingCart,
-        }}
-      >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/product" element={<SelectedProduct />} />
-            <Route path="/signup-products" element={<SignupProducts />} />
-          </Routes>
-        </BrowserRouter>
-      </CartContext.Provider>
-    </UserContext.Provider>
-  );
+    return (
+        <UserContext.Provider
+            value={{
+                token,
+                setToken,
+                username,
+                setUsername,
+            }}
+        >
+            <CartContext.Provider
+                value={{
+                    shoppingCart,
+                    setShoppingCart,
+                }}
+            >
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/sign-up" element={<SignUp />} />
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/checkout" element={<Checkout />} />
+                        <Route path="/product" element={<SelectedProduct />} />
+                        <Route path="/signup-products" element={<SignupProducts />} />
+                    </Routes>
+                </BrowserRouter>
+            </CartContext.Provider>
+        </UserContext.Provider>
+    );
 }
 
 export default App;
