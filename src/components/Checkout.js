@@ -2,10 +2,13 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import { ThreeDots } from 'react-loader-spinner';
 import UserContext from '../shared/userContext';
 import CartContext from '../shared/cartContext';
 
 import Header from './Header';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Checkout() {
 
@@ -14,6 +17,7 @@ function Checkout() {
     const { shoppingCart } = useContext(CartContext);
 
     const [popup, setPopup] = useState('');
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         if (!token) {
@@ -39,7 +43,25 @@ function Checkout() {
     }
 
     function handlePurchase() {
-        return;
+        setPopup('popup');
+        setMessage('');
+        axios.put(`${API_URL}/checkout`,
+        {},
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(() => {
+                setMessage(`
+                    Thank you for your patronage!
+                    You can download your new purchases
+                    on your library.
+                `);
+            })
+            .catch(err => {
+                setMessage(err.response.data);
+            });
     }
 
     return (
@@ -68,6 +90,26 @@ function Checkout() {
                     </RightContainer>
                 </Container>
             </OuterContainer>
+            {popup ? (
+                message ? (
+                    <PopupBackground>
+                        <PopupContainer>
+                            <p>{message}</p>
+                            <button onClick={navigate('/')}>
+                                Ok
+                            </button>
+                        </PopupContainer>
+                    </PopupBackground>
+                ) : (
+                    <PopupBackground>
+                        <PopupContainer>
+                            <ThreeDots color='var(--maincolor)' />
+                        </PopupContainer>
+                    </PopupBackground>
+                )
+            ) : (
+                <></>
+            )}
         </>
     );
 }
@@ -185,6 +227,61 @@ const ButtonStyle = styled.button`
     @media (max-width: 1200px) {
         width: 280px;
         margin: 32px auto 0px auto;
+    }
+`;
+
+
+const PopupBackground = styled.div`
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const PopupContainer = styled.div`
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: var(--brightcolor);
+    border: 1px solid var(--graycolor);
+    border-radius: 16px;
+    box-shadow: 0px 0px 4px 4px #606060;
+
+    > p {
+        font-family: var(--scriptfont);
+        font-size: 24px;
+        text-align: center;
+        color: var(--darkcolor);
+        cursor: pointer;
+    }
+
+    > button {
+        width: 96px;
+        height: 42px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 8px;
+        background-color: var(--maincolor);
+        border: none;
+        cursor: pointer;
+
+        font-family: var(--scriptfont);
+        font-weight: 500;
+        font-size: 28px;
+        color: var(--brightcolor);
+        text-align: center;
     }
 `;
 

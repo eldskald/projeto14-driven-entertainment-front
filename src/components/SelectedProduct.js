@@ -9,53 +9,48 @@ import Header from "./Header";
 
 import Loading from "../styles/Loading";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function SelectedProduct() {
 
     const navigate = useNavigate();
     const { library } = useContext(UserContext);
     const { shoppingCart, setShoppingCart } = useContext(CartContext);
-    const { productId } = useParams();
+    const { category, subcategory, productName } = useParams();
 
     const [product, setProduct] = useState({});
-    const [category, setCategory] = useState('');
     const [subcategories, setSubcategories] = useState('');
     const [cartPopup, setCartPopup] = useState('');
     const [loading, setLoading] = useState('loading');
     const [error, setError] = useState('');
 
-    useEffect(async () => {
-        try {
-            let prod = await axios.get(`/product/${productId}`);
-            prod = prod.data
-            let cat = await axios.get(`/${prod.category}`);
-            cat = cat.data;
-            const tags = '';
-            for (let i = 0; i < prod.subcategory; i++ ) {
-                let subcat = await axios.get(`${cat._id}/${prod.subcategory[i]}`);
-                subcat = subcat.data;
-                if (i < prod.subcategory - 1) {
-                    tags += `${subcat.name}, `;
-                } else {
-                    tags += subcat.name;
+    useEffect(() => {
+        axios.get(`${API_URL}/products/${category}/${subcategory}/${productName}`)
+            .then(res => {
+                setProduct(res.data);
+                setLoading('');
+                let subcatString = '';
+                for (let i = 0; i < res.data.subcategory.length; i++) {
+                    if (i < res.data.subcategory.length - 1) {
+                        subcatString += `${res.data.subcategory[i]}, `;
+                    } else {
+                        subcatString += res.data.subcategory[i];
+                    }
                 }
-            }
-            setProduct(prod);
-            setCategory(cat.name);
-            setSubcategories(tags);
-            setLoading('')
-
-        } catch(_err) {
-            setLoading('')
-            setError(`
-                There was an error.
-                Try again.
-            `);
-        }
+                setSubcategories(subcatString);
+            })
+            .catch(() => {
+                setLoading('')
+                setError(`
+                    There was an error.
+                    Try again.
+                `);
+            });
     }, [])
 
     function checkIfItsOnLibrary() {
         for (let i = 0; i < library.length; i++) {
-            if (library[i] === productId) {
+            if (library[i] === product._id) {
                 return true;
             }
         }
@@ -64,7 +59,7 @@ export default function SelectedProduct() {
 
     function checkIfItsOnCart() {
         for (let i = 0; i < shoppingCart.length; i++) {
-            if (shoppingCart[i].prodId === productId) {
+            if (shoppingCart[i].prodId === product._id) {
                 return true;
             }
         }
@@ -79,10 +74,11 @@ export default function SelectedProduct() {
         setShoppingCart([
             ...shoppingCart,
             {
-                prodId: productId,
+                prodId: product._id,
                 name: product.name,
                 coverUrl: product.image,
-                category: category,
+                category: product.category,
+                subcategory: product.subcategory[0],
                 price: product.price
             }
         ]);
@@ -90,7 +86,7 @@ export default function SelectedProduct() {
     }
 
     function handleDownload() {
-        return;
+        setError('Enjoy!');
     }
 
     function EndButton() {
@@ -151,7 +147,7 @@ export default function SelectedProduct() {
                                     <p>
                                         {`Release date: ${product.releaseDate}`}<br/>
                                         {`Producer: ${product.producer}`}<br/>
-                                        {category}<br/>
+                                        {product.category}<br/>
                                         {subcategories}
                                     </p>
                                 </CoverContainer>
@@ -160,7 +156,7 @@ export default function SelectedProduct() {
                                     <ReleaseAndProducerMobile>
                                         {`Release date: ${product.releaseDate}`}<br/>
                                         {`Producer: ${product.producer}`}<br/>
-                                        {category}<br/>
+                                        {product.category}<br/>
                                         {subcategories}
                                     </ReleaseAndProducerMobile>
                                     <RatingsButton onClick={handleClickRatings}>

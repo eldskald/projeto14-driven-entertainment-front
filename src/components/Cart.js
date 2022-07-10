@@ -18,6 +18,7 @@ export default function Cart() {
     //     name: <nome do produto>
     //     coverUrl: <URL da imagem de capa do produto>
     //     category: <nome da categoria>
+    //     subcategory: <nome de uma subcategoria>
     //     price: <preço do produto>
     // }
     //

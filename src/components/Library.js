@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserContext from '../shared/userContext';
@@ -7,13 +7,24 @@ import Header from './Header';
 import Title from '../styles/Title';
 import Thumbnail from '../styles/Thumbnail';
 
+// Estrutura de cada objeto na array library:
+// {
+//     prodId: <_id do produto>
+//     name: <nome do produto>
+//     coverUrl: <URL da imagem de capa do produto>
+//     category: <nome da categoria>
+//     subcategory: <nome de uma subcategoria>
+//     price: <preço do produto>
+// }
+// Igual do cart
+
 function Library() {
 
     const navigate = useNavigate();
     const { library } = useContext(UserContext);
 
-    function handleClick() {
-        return;
+    function handleClick(prod) {
+        navigate(`/products/${prod.category}/${prod.subcategory}/${prod.name}`);
     }
 
     return (
@@ -28,8 +39,8 @@ function Library() {
                         {library.map((product, index) => {
                             <ProductContainer key={index}>
                                 <Thumbnail
-                                    artUrl={product.image}
-                                    onClick={handleClick}
+                                    artUrl={product.coverUrl}
+                                    onClick={() => handleClick(product)}
                                 />
                                 <p>{product.name}</p>
                             </ProductContainer>

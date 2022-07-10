@@ -24,7 +24,7 @@ function Home() {
   // porque assim a gente evita fazer uma requisição extra pra
   // API e a página do carrinho carrega mais rápido.
 
-  const { username, token } = useContext(UserContext);
+  const { token } = useContext(UserContext);
   const [relatedProducts, setRelatedProducts] = useState(null);
   const [moreSalesProducts, setMoreSalesProducts] = useState(null);
   const [loading, setLoading] = useState(true);
