@@ -11,6 +11,7 @@ import SelectedProduct from "./SelectedProduct";
 import SignupProducts from "./SignupProducts";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
+import Library from "./Library";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -70,6 +71,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/sign-up" element={<SignUp />} />
+                        <Route path="/library" element={<Library />} />
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/checkout" element={<Checkout />} />
                         <Route path="/product" element={<SelectedProduct />} />

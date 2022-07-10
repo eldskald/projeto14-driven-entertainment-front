@@ -20,7 +20,10 @@ export default function Header() {
         return (
             <>
                 {username ? (
-                    <p onClick={logout}>Logout</p>
+                    <>
+                        <p onClick={() => navigate('/library')}>Library</p>
+                        <p onClick={logout}>Logout</p>
+                    </>
                 ) : (
                     <>
                         <p onClick={() => navigate("/login")}>Login</p>
@@ -51,8 +54,9 @@ export default function Header() {
                                 <AuthLegend>
                                     <div>
                                         {`Hello, ${username}!`}
-                                        <br />
-                                        <div onClick={logout}>Logout</div>
+                                        <br/>
+                                        <span onClick={() => navigate('/library')}>Library</span>&emsp;{'|'}&emsp;
+                                        <span onClick={logout}>Logout</span>
                                     </div>
                                 </AuthLegend>
                             ) : (
@@ -60,7 +64,7 @@ export default function Header() {
                                     <p>
                                         {"Welcome :)"}
                                         <br />
-                                        <Link to={"/login"}>Login</Link> or{" "}
+                                        <Link to={"/login"}>Login</Link>&emsp;{'|'}&emsp;
                                         <Link to={"/sign-up"}>Sign up</Link>
                                     </p>
                                 </AuthLegend>
@@ -151,7 +155,7 @@ const AuthLegend = styled.div`
     line-height: 19px;
     color: var(--darkcolor);
 
-    > div > div {
+    > div > span {
         width: fit-content;
         margin-top: 4px;
         cursor: pointer;
@@ -227,6 +231,7 @@ const PopupBackground = styled.div`
     bottom: 0px;
     left: 0px;
     right: 0px;
+    z-index: 1;
 
     background-color: rgba(0, 0, 0, 0.5);
 `;
@@ -235,6 +240,7 @@ const PopupContainer = styled.div`
     position: absolute;
     top: 32px;
     right: 32px;
+    z-index: 1;
 
     padding: 16px;
     display: flex;
@@ -251,5 +257,9 @@ const PopupContainer = styled.div`
         font-size: 24px;
         margin: 8px 0px;
         cursor: pointer;
+
+        :hover {
+            color: var(--maincolor);
+        }
     }
 `;

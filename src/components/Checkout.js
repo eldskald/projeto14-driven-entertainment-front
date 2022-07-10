@@ -38,6 +38,10 @@ function Checkout() {
         return `$${sum.toFixed(2)}`;
     }
 
+    function handlePurchase() {
+        return;
+    }
+
     return (
         <>
             <Header />
@@ -55,8 +59,12 @@ function Checkout() {
                     </CartContainer>
                     <RightContainer>
                         <h1>{`Total: ${getTotalPrice()}`}</h1>
-                        <ButtonStyle>Pay with Credit Card</ButtonStyle>
-                        <ButtonStyle>Pay with Wire Transfer</ButtonStyle>
+                        <ButtonStyle onClick={handlePurchase}>
+                            Pay with Credit Card
+                        </ButtonStyle>
+                        <ButtonStyle onClick={handlePurchase}>
+                            Pay with Wire Transfer
+                        </ButtonStyle>
                     </RightContainer>
                 </Container>
             </OuterContainer>
