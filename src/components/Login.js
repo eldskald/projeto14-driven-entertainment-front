@@ -41,6 +41,7 @@ function Login() {
                     setShoppingCart([...res.data.cart]);
                 };
                 saveSession(res.data.token);
+                navigate('/');
             })
             .catch(err => {
                 setError(err.response.data);
