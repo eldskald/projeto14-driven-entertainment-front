@@ -380,7 +380,7 @@ const PopupBackground = styled.div`
 `;
 
 const PopupContainer = styled.div`
-    padding: 16px;
+    padding: 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -388,13 +388,14 @@ const PopupContainer = styled.div`
 
     background-color: var(--brightcolor);
     border: 1px solid var(--graycolor);
-    border-radius: 16px;
+    border-radius: 32px;
     box-shadow: 0px 0px 4px 4px #606060;
 
     > p {
         margin-bottom: 32px;
         font-family: var(--scriptfont);
         font-size: 24px;
+        font-weight: 500;
         text-align: center;
         color: var(--darkcolor);
         cursor: pointer;
