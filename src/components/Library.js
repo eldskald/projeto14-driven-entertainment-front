@@ -37,11 +37,8 @@ function Library() {
                     </TitleContainer>
                     <LibraryContainer>
                         {library.map((product, index) => (
-                            <ProductContainer key={index}>
-                                <Thumbnail
-                                    artUrl={product.coverUrl}
-                                    onClick={() => handleClick(product)}
-                                />
+                            <ProductContainer key={index} onClick={() => handleClick(product)} >
+                                <Thumbnail artUrl={product.coverUrl} />
                                 <p>{product.name}</p>
                             </ProductContainer>
                         ))}
