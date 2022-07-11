@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserContext from '../shared/userContext';
-import Header from './Header';
+import MinorHeader from '../styles/MinorHeader';
 
 import Title from '../styles/Title';
 import Thumbnail from '../styles/Thumbnail';
@@ -29,7 +29,7 @@ function Library() {
 
     return (
         <>
-            <Header />
+            <MinorHeader />
             <OuterContainer>
                 <Container>
                     <TitleContainer>
