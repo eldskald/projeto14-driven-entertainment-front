@@ -30,18 +30,22 @@ export default function Cart() {
     const { token } = useContext(UserContext);
     const { shoppingCart, setShoppingCart } = useContext(CartContext);
 
-    function Product({ id, coverArt, title, category, price, index }) {
+    function Product({ id, coverArt, title, category, subcategory, price, index }) {
+        console.log(price);
         return (
             <ProductContainer>
                 <CoverAndTitleAndCategory>
-                    <Thumbnail artUrl={coverArt} onClick={() => navigate(`/${id}`)} />
+                    <Thumbnail
+                        artUrl={coverArt}
+                        onClick={() => handleClick(category, subcategory, title)}
+                    />
                     <TitleAndCategory onClick={() => navigate(`/${id}`)} >
                         <h1>{title}</h1>
                         <h2>{category}</h2>
-                        <h3>{`$${price.toFixed(2)}`}</h3>
+                        <h3>{price}</h3>
                     </TitleAndCategory>
                 </CoverAndTitleAndCategory>
-                <Pricetag>{`$${price.toFixed(2)}`}</Pricetag>
+                <Pricetag>{price}</Pricetag>
                 <RemoveButton>
                     <ion-icon
                         name='trash-outline'
@@ -50,6 +54,10 @@ export default function Cart() {
                 </RemoveButton>
             </ProductContainer>
         );
+    }
+
+    function handleClick(category, subcategory, name) {
+        navigate(`/products/${category}/${subcategory}/${name}`);
     }
 
     function handleRemove(index) {
@@ -89,8 +97,9 @@ export default function Cart() {
                                 id={product.prodId}
                                 title={product.name}
                                 category={product.category}
+                                subcategory={product.subcategory}
                                 coverArt={product.coverUrl}
-                                price={`$${product.price.toFixed(2)}`}
+                                price={`$${Number(product.price).toFixed(2)}`}
                                 index={index}
                             />
                         ))}

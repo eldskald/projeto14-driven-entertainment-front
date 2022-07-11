@@ -11,20 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function Home() {
-  // O shopping cart tem que ser preenchidos com objetos
-  // com a seguinte estrutura:
-  //
-  // {
-  //     prodId: <_id do produto>
-  //     name: <nome do produto>
-  //     coverUrl: <URL da imagem de capa do produto>
-  //     category: <nome da categoria>
-  //     price: <preço do produto>
-  // }
-  //
-  // É bom a gente fazer assim ao invés de só botar os _id's
-  // porque assim a gente evita fazer uma requisição extra pra
-  // API e a página do carrinho carrega mais rápido.
+
   const { token } = useContext(UserContext);
   const [newProducts, setnewProducts] = useState(null);
   const [topRatedProducts, setTopRatedProducts] = useState(null);
