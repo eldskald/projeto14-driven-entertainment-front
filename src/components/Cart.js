@@ -30,15 +30,14 @@ export default function Cart() {
     const { token } = useContext(UserContext);
     const { shoppingCart, setShoppingCart } = useContext(CartContext);
 
-    function Product({ id, coverArt, title, category, subcategory, price, index }) {
+    function Product({ coverArt, title, category, subcategory, price, index }) {
         return (
             <ProductContainer>
-                <CoverAndTitleAndCategory>
-                    <Thumbnail
-                        artUrl={coverArt}
-                        onClick={() => handleClick(category, subcategory, title)}
-                    />
-                    <TitleAndCategory onClick={() => navigate(`/${id}`)} >
+                <CoverAndTitleAndCategory
+                    onClick={() => handleClick(category, subcategory, title)}
+                >
+                    <Thumbnail artUrl={coverArt} />
+                    <TitleAndCategory>
                         <h1>{title}</h1>
                         <h2>{category}</h2>
                         <h3>{price}</h3>
@@ -56,9 +55,6 @@ export default function Cart() {
     }
 
     function handleClick(category, subcategory, name) {
-        console.log(category);
-        console.log(subcategory);
-        console.log(name);
         navigate(`/products/${category}/${subcategory}/${name}`);
     }
 
@@ -96,7 +92,6 @@ export default function Cart() {
                         {shoppingCart.map((product, index) => (
                             <Product
                                 key={index}
-                                id={product.prodId}
                                 title={product.name}
                                 category={product.category}
                                 subcategory={product.subcategory}
@@ -200,6 +195,7 @@ const TitleAndCategory = styled.div`
     display: flex;
     margin-left: 32px;
     flex-direction: column;
+    cursor: pointer;
 
     > h1 {
         font-family: var(--headerfont);

@@ -118,8 +118,8 @@ function Home() {
                             key={prod._id}
                           >
                             <Thumbnail artUrl={prod.image} />
-                            <p>{prod.name}</p>
-                            <p>$ {prod.price.toFixed(2)}</p>
+                            <h1>{prod.name}</h1>
+                            <h2>${prod.price.toFixed(2)}</h2>
                           </IndividualContent>
                         );
                       })}
@@ -137,8 +137,8 @@ function Home() {
                             key={prod._id}
                           >
                             <Thumbnail artUrl={prod.image} />
-                            <p>{prod.name}</p>
-                            <p>$ {prod.price.toFixed(2)}</p>
+                            <h1>{prod.name}</h1>
+                            <h2>${prod.price.toFixed(2)}</h2>
                           </IndividualContent>
                         );
                       })}
@@ -167,6 +167,7 @@ const OuterContainer = styled.div`
 
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction:column;
 `;
 
@@ -254,17 +255,30 @@ const ProductsDiv = styled.div`
 
 const IndividualContent = styled.div`
   width: 18%;
-  height: 200px;
-  margin: 20px 3%;
+  height: 100%;
+  
+  padding: 0px 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  > p {
+
+  > h1 {
+    margin-top: 8px;
+    font-family: var(--headerfont);
+    font-size: 28px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-lines: 2;
+    color: var(--darkcolor);
+  }
+
+  > h2 {
     font-family: var(--scriptfont);
     font-size: 24px;
     color: var(--darkcolor);
   }
+
   @media (max-width: 660px) {
     height: 150px;
     > p {
