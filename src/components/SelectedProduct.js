@@ -354,6 +354,10 @@ const ButtonStyle = styled.button`
     color: var(--brightcolor);
     text-align: center;
 
+    :disabled {
+        opacity: 0.4;
+    }
+
     @media (max-width: 1200px) {
         width: 80%;
     }
