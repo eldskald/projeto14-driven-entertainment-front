@@ -7,6 +7,8 @@ import Header from "./Header.js";
 import Loading from "../styles/Loading.js";
 import Title from "../styles/Title";
 import Thumbnail from "../styles/Thumbnail";
+import { useNavigate } from "react-router-dom";
+
 
 function Home() {
   // O shopping cart tem que ser preenchidos com objetos
@@ -23,11 +25,11 @@ function Home() {
   // É bom a gente fazer assim ao invés de só botar os _id's
   // porque assim a gente evita fazer uma requisição extra pra
   // API e a página do carrinho carrega mais rápido.
-
   const { token } = useContext(UserContext);
   const [newProducts, setnewProducts] = useState(null);
   const [topRatedProducts, setTopRatedProducts] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate=useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -107,7 +109,7 @@ function Home() {
                       {newProducts.map((prod) => {
                         return (
                           <IndividualContent
-                            onClick={() => console.log(prod)}
+                            onClick={() => {navigate(`/products/${prod.category}/${prod.subcategory[0]}/${prod.name}`)}}
                             key={prod._id}
                           >
                             <Thumbnail artUrl={prod.image} />
@@ -126,7 +128,7 @@ function Home() {
                       {topRatedProducts.map((prod) => {
                         return (
                           <IndividualContent
-                            onClick={() => console.log(prod)}
+                          onClick={() =>{navigate(`/products/${prod.category}/${prod.subcategory[0]}/${prod.name}`)}}
                             key={prod._id}
                           >
                             <Thumbnail artUrl={prod.image} />

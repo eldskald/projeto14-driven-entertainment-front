@@ -74,7 +74,7 @@ function App() {
                         <Route path="/library" element={<Library />} />
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/checkout" element={<Checkout />} />
-                        <Route path="/products/:category/:subCategory/:productName" element={<SelectedProduct />} />
+                        <Route path="/products/:category/:subcategory/:productName" element={<SelectedProduct />} />
                         <Route path="/signup-products" element={<SignupProducts />} />
                     </Routes>
                 </BrowserRouter>
