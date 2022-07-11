@@ -105,8 +105,6 @@ function Home() {
                                         {categories.map((cat, index) => {
                                             return (<button key={index} onClick={() => navigate(`/products/${cat}`)}>{`${cat}s`}</button>)
                                         })}
-                                        <button>Video Games</button>
-                                        <button>Movies</button>
                                     </CategoryContainer>
                                     <TitleContainer>
                                         <Title>New Releases</Title>
