@@ -30,7 +30,7 @@ export default function Cart() {
     const { token } = useContext(UserContext);
     const { shoppingCart, setShoppingCart } = useContext(CartContext);
 
-    function Product({ id, coverArt, title, category, subcategory, price, index }) {
+    function Product({ coverArt, title, category, subcategory, price, index }) {
         return (
             <ProductContainer>
                 <CoverAndTitleAndCategory>
@@ -38,7 +38,9 @@ export default function Cart() {
                         artUrl={coverArt}
                         onClick={() => handleClick(category, subcategory, title)}
                     />
-                    <TitleAndCategory onClick={() => navigate(`/${id}`)} >
+                    <TitleAndCategory
+                        onClick={() => handleClick(category, subcategory, title)}
+                    >
                         <h1>{title}</h1>
                         <h2>{category}</h2>
                         <h3>{price}</h3>
@@ -96,7 +98,6 @@ export default function Cart() {
                         {shoppingCart.map((product, index) => (
                             <Product
                                 key={index}
-                                id={product.prodId}
                                 title={product.name}
                                 category={product.category}
                                 subcategory={product.subcategory}
