@@ -12,6 +12,7 @@ import SignupProducts from "./SignupProducts";
 import Cart from "./Cart";
 import Checkout from "./Checkout";
 import Library from "./Library";
+import Category from "./Category";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -75,6 +76,7 @@ function App() {
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/checkout" element={<Checkout />} />
                         <Route path="/products/:category/:subcategory/:productName" element={<SelectedProduct />} />
+                        <Route path='/products/:category' element={<Category/>} />
                         <Route path="/signup-products" element={<SignupProducts />} />
                     </Routes>
                 </BrowserRouter>

@@ -7,17 +7,19 @@ import Header from "./Header.js";
 import Loading from "../styles/Loading.js";
 import Title from "../styles/Title";
 import Thumbnail from "../styles/Thumbnail";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
-function Home() {
+function Category() {
 
   const { token } = useContext(UserContext);
   const [newProducts, setnewProducts] = useState(null);
   const [topRatedProducts, setTopRatedProducts] = useState(null);
-  const [categories, setCategories]=useState(null);
+  const [subcategories, setSubcategories]=useState(null);
   const [loading, setLoading] = useState(true);
+  
   const navigate=useNavigate();
+  const {category}=useParams();
 
   useEffect(() => {
     setLoading(true);
@@ -57,10 +59,16 @@ function Home() {
       console.log(err.response.data);
     });
 
-   axios.get(`${process.env.REACT_APP_API_URL}/categories`)
+    const configCategory={
+        headers:{
+            'Category':`${category}`
+        }
+    };
+
+   axios.get(`${process.env.REACT_APP_API_URL}/subcategories`, configCategory)
       .then(res=>{
         setLoading(false);
-        setCategories(res.data);
+        setSubcategories(res.data);
       })
       .catch(err=>{
         setLoading(false);
@@ -70,8 +78,8 @@ function Home() {
     setLoading(false);
   }, [token]);
 
-  function HomeScreenContent() {
-    if (!newProducts || !topRatedProducts || !categories) {
+  function CategoryScreenContent() {
+    if (!newProducts || !topRatedProducts || !subcategories) {
       return (
         <Loading>
           <BallTriangle
@@ -101,13 +109,13 @@ function Home() {
               <Header />
               <OuterContainer>
                 <CategoryContainer>
-                  {categories.map((cat,index)=>{
-                    return (<button key={index} onClick={()=>navigate(`/products/${cat}`)}>{cat}</button>)
+                  {subcategories.map((subcat,index)=>{
+                    return (<button key={index} >{subcat}</button>)
                   })}
                 </CategoryContainer>
                 <InnerContainer>
                   <TitleContainer>
-                    <Title>New Releases</Title>
+                    <Title>{`New ${category} Releases `}</Title>
                   </TitleContainer>
                   <ContentProduct>
                     <ProductsDiv>
@@ -126,7 +134,7 @@ function Home() {
                     </ProductsDiv>
                   </ContentProduct>
                   <TitleContainer>
-                    <Title>Top Rated</Title>
+                    <Title>{`Top Rated ${category}s`}</Title>
                   </TitleContainer>
                   <ContentProduct>
                     <ProductsDiv>
@@ -153,7 +161,7 @@ function Home() {
     }
   }
 
-  const renderPageHomeScreen = HomeScreenContent();
+  const renderPageHomeScreen = CategoryScreenContent();
 
   return <>{renderPageHomeScreen}</>;
 }
@@ -172,13 +180,23 @@ const OuterContainer = styled.div`
 
 const CategoryContainer =styled.div`
 display:flex;
+flex-wrap:wrap;
 width:100%;
-justify-content:center;
-padding: 0 10%;
-align-items:center;
-margin-top:50px;
+justify-content: center;
+align-items: center;    
+margin-top:90px;
+flex-grow: 1;
+    padding: 32px;
+    display: flex;
+    overflow-y: scroll;
+
+    background-color: var(--brightcolor);
+    border: 1px solid var(--graycolor);
+    border-radius: 32px;
+    box-shadow: 0px 0px 16px #c0c0c0;
+
   > button{
-    width: 200px;
+    padding:2% 1%;
     height: 42px;
     margin: 0px 32px 0px 0px;
 
@@ -196,12 +214,13 @@ margin-top:50px;
     color: var(--brightcolor);
     text-align: center;
   }
-  > button:hover{
-    cursor:pointer;
-  }
-  @media (max-width:660px) {
+  @media (max-width:1200px) {
+    flex-direction: column;
+    border-radius: 0px;
+    border-left: 0px none transparent;
+    border-right: 0px none transparent;
     >button{
-      font-size:20px;
+      font-size:15px;
     }
   }
 `;
@@ -277,4 +296,4 @@ const IndividualContent = styled.div`
   }
 `;
 
-export default Home;
+export default Category;
