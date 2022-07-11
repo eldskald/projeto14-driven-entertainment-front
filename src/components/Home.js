@@ -12,150 +12,150 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
 
-  const { token } = useContext(UserContext);
-  const [newProducts, setnewProducts] = useState(null);
-  const [topRatedProducts, setTopRatedProducts] = useState(null);
-  const [categories, setCategories]=useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate=useNavigate();
+    const { token } = useContext(UserContext);
+    const [newProducts, setnewProducts] = useState(null);
+    const [topRatedProducts, setTopRatedProducts] = useState(null);
+    const [categories, setCategories] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    setLoading(true);
-    let config;
-    if (!token) {
-      config = {};
-    } else {
-      config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+    useEffect(() => {
+        setLoading(true);
+        let config;
+        if (!token) {
+            config = {};
+        } else {
+            config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+        }
+
+        const promiseNewRealsesProducts = axios.get(
+            `${process.env.REACT_APP_API_URL}/productsNewReleases`,
+            config
+        );
+        promiseNewRealsesProducts.then((res) => {
+            setLoading(false);
+            setnewProducts(res.data);
+        });
+        promiseNewRealsesProducts.catch((err) => {
+            setLoading(false);
+            console.log(err.response.data);
+        });
+
+        const promisetopRateProducts = axios.get(
+            `${process.env.REACT_APP_API_URL}/productsTopRated`
+        );
+        promisetopRateProducts.then((res) => {
+            setLoading(false);
+            setTopRatedProducts(res.data);
+        });
+        promisetopRateProducts.catch((err) => {
+            setLoading(false);
+            console.log(err.response.data);
+        });
+
+        axios.get(`${process.env.REACT_APP_API_URL}/categories`)
+            .then(res => {
+                setLoading(false);
+                setCategories(res.data);
+            })
+            .catch(err => {
+                setLoading(false);
+                console.log(err.response.data)
+            });
+
+        setLoading(false);
+    }, [token]);
+
+    function HomeScreenContent() {
+        if (!newProducts || !topRatedProducts || !categories) {
+            return (
+                <Loading>
+                    <BallTriangle
+                        width="200"
+                        height="200"
+                        strokeColor="#126BA5"
+                        animationDuration="1"
+                        color="#ff4791"
+                    />
+                </Loading>
+            );
+        } else {
+            return (
+                <>
+                    {loading ? (
+                        <Loading>
+                            <BallTriangle
+                                width="200"
+                                height="200"
+                                strokeColor="#FFFFFF"
+                                animationDuration="1"
+                                color="#ff4791"
+                            />
+                        </Loading>
+                    ) : (
+                        <>
+                            <Header />
+                            <OuterContainer>
+                                <CategoryContainer>
+                                    {categories.map((cat, index) => {
+                                        return (<button key={index} onClick={() => navigate(`/products/${cat}`)}>{cat}</button>)
+                                    })}
+                                </CategoryContainer>
+                                <InnerContainer>
+                                    <TitleContainer>
+                                        <Title>New Releases</Title>
+                                    </TitleContainer>
+                                    <ContentProduct>
+                                        <ProductsDiv>
+                                            {newProducts.map((prod) => {
+                                                return (
+                                                    <IndividualContent
+                                                        onClick={() => { navigate(`/products/${prod.category}/${prod.subcategory[0]}/${prod.name}`) }}
+                                                        key={prod._id}
+                                                    >
+                                                        <Thumbnail artUrl={prod.image} />
+                                                        <h1>{prod.name}</h1>
+                                                        <h2>${prod.price.toFixed(2)}</h2>
+                                                    </IndividualContent>
+                                                );
+                                            })}
+                                        </ProductsDiv>
+                                    </ContentProduct>
+                                    <TitleContainer>
+                                        <Title>Top Rated</Title>
+                                    </TitleContainer>
+                                    <ContentProduct>
+                                        <ProductsDiv>
+                                            {topRatedProducts.map((prod) => {
+                                                return (
+                                                    <IndividualContent
+                                                        onClick={() => { navigate(`/products/${prod.category}/${prod.subcategory[0]}/${prod.name}`) }}
+                                                        key={prod._id}
+                                                    >
+                                                        <Thumbnail artUrl={prod.image} />
+                                                        <h1>{prod.name}</h1>
+                                                        <h2>${prod.price.toFixed(2)}</h2>
+                                                    </IndividualContent>
+                                                );
+                                            })}
+                                        </ProductsDiv>
+                                    </ContentProduct>
+                                </InnerContainer>
+                            </OuterContainer>
+                        </>
+                    )}
+                </>
+            );
+        }
     }
 
-    const promiseNewRealsesProducts = axios.get(
-      `${process.env.REACT_APP_API_URL}/productsNewReleases`,
-      config
-    );
-    promiseNewRealsesProducts.then((res) => {
-      setLoading(false);
-      setnewProducts(res.data);
-    });
-    promiseNewRealsesProducts.catch((err) => {
-      setLoading(false);
-      console.log(err.response.data);
-    });
+    const renderPageHomeScreen = HomeScreenContent();
 
-    const promisetopRateProducts = axios.get(
-      `${process.env.REACT_APP_API_URL}/productsTopRated`
-    );
-    promisetopRateProducts.then((res) => {
-      setLoading(false);
-      setTopRatedProducts(res.data);
-    });
-    promisetopRateProducts.catch((err) => {
-      setLoading(false);
-      console.log(err.response.data);
-    });
-
-   axios.get(`${process.env.REACT_APP_API_URL}/categories`)
-      .then(res=>{
-        setLoading(false);
-        setCategories(res.data);
-      })
-      .catch(err=>{
-        setLoading(false);
-        console.log(err.response.data)
-      });
-    
-    setLoading(false);
-  }, [token]);
-
-  function HomeScreenContent() {
-    if (!newProducts || !topRatedProducts || !categories) {
-      return (
-        <Loading>
-          <BallTriangle
-            width="200"
-            height="200"
-            strokeColor="#126BA5"
-            animationDuration="1"
-            color="#ff4791"
-          />
-        </Loading>
-      );
-    } else {
-      return (
-        <>
-          {loading ? (
-            <Loading>
-              <BallTriangle
-                width="200"
-                height="200"
-                strokeColor="#FFFFFF"
-                animationDuration="1"
-                color="#ff4791"
-              />
-            </Loading>
-          ) : (
-            <>
-              <Header />
-              <OuterContainer>
-                <CategoryContainer>
-                  {categories.map((cat,index)=>{
-                    return (<button key={index} onClick={()=>navigate(`/products/${cat}`)}>{cat}</button>)
-                  })}
-                </CategoryContainer>
-                <InnerContainer>
-                  <TitleContainer>
-                    <Title>New Releases</Title>
-                  </TitleContainer>
-                  <ContentProduct>
-                    <ProductsDiv>
-                      {newProducts.map((prod) => {
-                        return (
-                          <IndividualContent
-                            onClick={() => {navigate(`/products/${prod.category}/${prod.subcategory[0]}/${prod.name}`)}}
-                            key={prod._id}
-                          >
-                            <Thumbnail artUrl={prod.image} />
-                            <h1>{prod.name}</h1>
-                            <h2>${prod.price.toFixed(2)}</h2>
-                          </IndividualContent>
-                        );
-                      })}
-                    </ProductsDiv>
-                  </ContentProduct>
-                  <TitleContainer>
-                    <Title>Top Rated</Title>
-                  </TitleContainer>
-                  <ContentProduct>
-                    <ProductsDiv>
-                      {topRatedProducts.map((prod) => {
-                        return (
-                          <IndividualContent
-                          onClick={() =>{navigate(`/products/${prod.category}/${prod.subcategory[0]}/${prod.name}`)}}
-                            key={prod._id}
-                          >
-                            <Thumbnail artUrl={prod.image} />
-                            <h1>{prod.name}</h1>
-                            <h2>${prod.price.toFixed(2)}</h2>
-                          </IndividualContent>
-                        );
-                      })}
-                    </ProductsDiv>
-                  </ContentProduct>
-                </InnerContainer>
-              </OuterContainer>
-            </>
-          )}
-        </>
-      );
-    }
-  }
-
-  const renderPageHomeScreen = HomeScreenContent();
-
-  return <>{renderPageHomeScreen}</>;
+    return <>{renderPageHomeScreen}</>;
 }
 
 const OuterContainer = styled.div`
@@ -169,9 +169,10 @@ const OuterContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction:column;
+  overflow-y: scroll;
 `;
 
-const CategoryContainer =styled.div`
+const CategoryContainer = styled.div`
 display:flex;
 width:100%;
 justify-content:center;
@@ -265,11 +266,14 @@ const IndividualContent = styled.div`
 
   > h1 {
     margin-top: 8px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+  
     font-family: var(--headerfont);
     font-size: 28px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-lines: 2;
     color: var(--darkcolor);
   }
 
