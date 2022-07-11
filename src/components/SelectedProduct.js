@@ -356,6 +356,7 @@ const ButtonStyle = styled.button`
 
     :disabled {
         opacity: 0.4;
+        cursor: default;
     }
 
     @media (max-width: 1200px) {
