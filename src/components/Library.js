@@ -109,15 +109,17 @@ const LibraryContainer = styled.div`
 `;
 
 const ProductContainer = styled.div`
-    width: 156px;
-    height: 280px;
-
-    padding: 16px;
+    height: 360px;
+    width: 250px;
+    
+    padding: 32px 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     > p {
+        margin-top: 16px;
+
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
