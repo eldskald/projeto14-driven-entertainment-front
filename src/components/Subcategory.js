@@ -10,16 +10,15 @@ import Thumbnail from "../styles/Thumbnail";
 import { useNavigate, useParams } from "react-router-dom";
 
 
-function Category() {
+function Subcategory() {
 
   const { token } = useContext(UserContext);
   const [newProducts, setnewProducts] = useState(null);
   const [topRatedProducts, setTopRatedProducts] = useState(null);
-  const [subcategories, setSubcategories]=useState(null);
   const [loading, setLoading] = useState(true);
   
   const navigate=useNavigate();
-  const {category}=useParams();
+  const { category,subcategory }=useParams();
 
   useEffect(() => {
     setLoading(true);
@@ -58,28 +57,12 @@ function Category() {
       setLoading(false);
       console.log(err.response.data);
     });
-
-    const configCategory={
-        headers:{
-            'Category':`${category}`
-        }
-    };
-
-   axios.get(`${process.env.REACT_APP_API_URL}/subcategories`, configCategory)
-      .then(res=>{
-        setLoading(false);
-        setSubcategories(res.data);
-      })
-      .catch(err=>{
-        setLoading(false);
-        console.log(err.response.data)
-      });
     
     setLoading(false);
   }, [token]);
 
   function CategoryScreenContent() {
-    if (!newProducts || !topRatedProducts || !subcategories) {
+    if (!newProducts || !topRatedProducts ) {
       return (
         <Loading>
           <BallTriangle
@@ -108,14 +91,9 @@ function Category() {
             <>
               <Header />
               <OuterContainer>
-                <CategoryContainer>
-                  {subcategories.map((subcat,index)=>{
-                    return (<button key={index} onClick={()=>navigate(`/products/${category}/${subcat}`)}>{subcat}</button>)
-                  })}
-                </CategoryContainer>
                 <InnerContainer>
                   <TitleContainer>
-                    <Title>{`New ${category}s Releases `}</Title>
+                    <Title>{`New ${subcategory} ${category}s Releases`}</Title>
                   </TitleContainer>
                   <ContentProduct>
                     <ProductsDiv>
@@ -134,7 +112,7 @@ function Category() {
                     </ProductsDiv>
                   </ContentProduct>
                   <TitleContainer>
-                    <Title>{`Top Rated ${category}s`}</Title>
+                    <Title>{`Top Rated ${subcategory} ${category}s`}</Title>
                   </TitleContainer>
                   <ContentProduct>
                     <ProductsDiv>
@@ -176,53 +154,6 @@ const OuterContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction:column;
-`;
-
-const CategoryContainer =styled.div`
-display:flex;
-flex-wrap:wrap;
-width:100%;
-justify-content: center;
-align-items: center;    
-margin-top:90px;
-flex-grow: 1;
-    padding: 32px;
-    display: flex;
-    overflow-y: scroll;
-
-    background-color: var(--brightcolor);
-    border: 1px solid var(--graycolor);
-    border-radius: 32px;
-    box-shadow: 0px 0px 16px #c0c0c0;
-
-  > button{
-    padding:2% 1%;
-    height: 42px;
-    margin: 0px 32px 0px 0px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 8px;
-    background-color: var(--maincolor);
-    cursor: pointer;
-
-    font-family: var(--scriptfont);
-    font-weight: 500;
-    font-size: 20px;
-    color: var(--brightcolor);
-    text-align: center;
-  }
-  @media (max-width:1200px) {
-    flex-direction: column;
-    border-radius: 0px;
-    border-left: 0px none transparent;
-    border-right: 0px none transparent;
-    >button{
-      font-size:15px;
-    }
-  }
 `;
 
 const InnerContainer = styled.div`
@@ -296,4 +227,4 @@ const IndividualContent = styled.div`
   }
 `;
 
-export default Category;
+export default Subcategory;
