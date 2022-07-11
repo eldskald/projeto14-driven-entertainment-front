@@ -33,21 +33,18 @@ export default function Cart() {
     function Product({ coverArt, title, category, subcategory, price, index }) {
         return (
             <ProductContainer>
-                <CoverAndTitleAndCategory>
-                    <Thumbnail
-                        artUrl={coverArt}
-                        onClick={() => handleClick(category, subcategory, title)}
-                    />
-                    <TitleAndCategory
-                        onClick={() => handleClick(category, subcategory, title)}
-                    >
+                <CoverAndTitleAndCategory
+                    onClick={() => handleClick(category, subcategory, title)}
+                >
+                    <Thumbnail artUrl={coverArt} />
+                    <TitleAndCategory>
                         <h1>{title}</h1>
                         <h2>{category}</h2>
                         <h3>{price}</h3>
                     </TitleAndCategory>
                 </CoverAndTitleAndCategory>
                 <Pricetag>{price}</Pricetag>
-                <RemoveButton>
+                <RemoveButton>»
                     <ion-icon
                         name='trash-outline'
                         onClick={() => handleRemove(index)}
@@ -201,6 +198,7 @@ const TitleAndCategory = styled.div`
     display: flex;
     margin-left: 32px;
     flex-direction: column;
+    cursor: pointer;
 
     > h1 {
         font-family: var(--headerfont);
