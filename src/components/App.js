@@ -31,19 +31,6 @@ function App() {
         if (!token) {
             return;
         }
-        axios.get('/library', {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-            .then(res => setLibrary(res.data))
-            .catch(() => endSession());
-    }, [token])
-
-    useEffect(() => {
-        if (!token) {
-            return;
-        }
         axios.put(`${API_URL}/cart`, shoppingCart, {
             headers: {
                 Authorization: `Bearer ${token}`,
