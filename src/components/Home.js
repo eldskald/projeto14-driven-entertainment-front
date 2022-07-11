@@ -100,12 +100,14 @@ function Home() {
                         <>
                             <Header />
                             <OuterContainer>
-                                <CategoryContainer>
-                                    {categories.map((cat, index) => {
-                                        return (<button key={index} onClick={() => navigate(`/products/${cat}`)}>{cat}</button>)
-                                    })}
-                                </CategoryContainer>
                                 <InnerContainer>
+                                    <CategoryContainer>
+                                        {categories.map((cat, index) => {
+                                            return (<button key={index} onClick={() => navigate(`/products/${cat}`)}>{`${cat}s`}</button>)
+                                        })}
+                                        <button>Video Games</button>
+                                        <button>Movies</button>
+                                    </CategoryContainer>
                                     <TitleContainer>
                                         <Title>New Releases</Title>
                                     </TitleContainer>
@@ -172,12 +174,13 @@ const OuterContainer = styled.div`
 `;
 
 const CategoryContainer = styled.div`
-display:flex;
-width:100%;
-justify-content:center;
-padding: 0 10%;
-align-items:center;
-margin-top:50px;
+  display:flex;
+  width:100%;
+  justify-content:center;
+  padding: 0 10%;
+  align-items:center;
+  margin: 50px 0px;
+
   > button{
     width: 200px;
     height: 42px;
@@ -196,10 +199,12 @@ margin-top:50px;
     font-size: 20px;
     color: var(--brightcolor);
     text-align: center;
+
+    > :hover{
+        cursor:pointer;
+    }
   }
-  > button:hover{
-    cursor:pointer;
-  }
+
   @media (max-width:660px) {
     >button{
       font-size:20px;
@@ -283,17 +288,6 @@ const IndividualContent = styled.div`
     font-family: var(--scriptfont);
     font-size: 24px;
     color: var(--darkcolor);
-  }
-
-  @media (max-width: 660px) {
-    height: 150px;
-    > p {
-      font-size: 12px;
-    }
-    > div {
-      width: 70px;
-      height: 100px;
-    }
   }
 `;
 
