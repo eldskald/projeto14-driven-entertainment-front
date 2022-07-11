@@ -57,8 +57,8 @@ function Checkout() {
                 setLibrary([...library, ...shoppingCart]);
                 setShoppingCart([]);
                 setMessage(`
-                    Thank you for your patronage!
-                    You can download your new purchases
+                    Thank you for your patronage!\n
+                    You can download your new purchases\n
                     on your library.
                 `);
             })
