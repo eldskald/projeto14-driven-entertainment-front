@@ -44,7 +44,7 @@ export default function Cart() {
                     </TitleAndCategory>
                 </CoverAndTitleAndCategory>
                 <Pricetag>{price}</Pricetag>
-                <RemoveButton>»
+                <RemoveButton>
                     <ion-icon
                         name='trash-outline'
                         onClick={() => handleRemove(index)}
@@ -55,9 +55,6 @@ export default function Cart() {
     }
 
     function handleClick(category, subcategory, name) {
-        console.log(category);
-        console.log(subcategory);
-        console.log(name);
         navigate(`/products/${category}/${subcategory}/${name}`);
     }
 
