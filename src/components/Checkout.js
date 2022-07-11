@@ -13,8 +13,8 @@ const API_URL = process.env.REACT_APP_API_URL;
 function Checkout() {
 
     const navigate = useNavigate();
-    const { token } = useContext(UserContext);
-    const { shoppingCart } = useContext(CartContext);
+    const { token, library, setLibrary } = useContext(UserContext);
+    const { shoppingCart, setShoppingCart } = useContext(CartContext);
 
     const [popup, setPopup] = useState('');
     const [message, setMessage] = useState('');
@@ -53,6 +53,8 @@ function Checkout() {
             }
         })
             .then(() => {
+                setLibrary([...library, ...shoppingCart]);
+                setShoppingCart([]);
                 setMessage(`
                     Thank you for your patronage!
                     You can download your new purchases
