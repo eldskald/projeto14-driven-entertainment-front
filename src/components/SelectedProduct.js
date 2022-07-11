@@ -70,8 +70,7 @@ export default function SelectedProduct() {
         window.open(product.ratingsUrl);
     }
 
-    function handleAddToCart(e) {
-        e.stopPropagation();
+    function handleAddToCart() {
         setShoppingCart([
             ...shoppingCart,
             {
@@ -86,8 +85,7 @@ export default function SelectedProduct() {
         setCartPopup('popup');
     }
 
-    function handleDownload(e) {
-        e.stopPropagation();
+    function handleDownload() {
         setError('Enjoy!');
     }
 
@@ -185,7 +183,7 @@ export default function SelectedProduct() {
                             Product added<br/>
                             to your cart!
                         </p>
-                        <button onClick={navigate('/')}>
+                        <button onClick={() => navigate('/')}>
                             Ok
                         </button>
                     </PopupContainer>
@@ -197,7 +195,7 @@ export default function SelectedProduct() {
                 <PopupBackground>
                     <PopupContainer>
                         <p>{error}</p>
-                        <button onClick={navigate('/')}>
+                        <button onClick={() => navigate('/')}>
                             Ok
                         </button>
                     </PopupContainer>

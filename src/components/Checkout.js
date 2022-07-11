@@ -98,7 +98,7 @@ function Checkout() {
                     <PopupBackground>
                         <PopupContainer>
                             <p>{message}</p>
-                            <button onClick={navigate('/')}>
+                            <button onClick={() => navigate('/')}>
                                 Ok
                             </button>
                         </PopupContainer>
