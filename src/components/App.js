@@ -24,7 +24,7 @@ function App() {
     const [shoppingCart, setShoppingCart] = useState([]);
 
     useEffect(() => {
-        loadSession(setToken, setUsername);
+        loadSession(setToken, setUsername, setLibrary, setShoppingCart);
     }, []);
 
     useEffect(() => {

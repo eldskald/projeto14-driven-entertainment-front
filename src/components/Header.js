@@ -8,12 +8,12 @@ import { endSession } from "../shared/loginPermanence.js";
 export default function Header() {
     const navigate = useNavigate();
     const { shoppingCart } = useContext(CartContext);
-    const { username, setToken, setUsername } = useContext(UserContext);
+    const { username, setToken, setUsername, setLibrary } = useContext(UserContext);
 
     const [popup, setPopup] = useState("");
 
     function logout() {
-        endSession(setToken, setUsername);
+        endSession(setToken, setUsername, setLibrary);
     }
 
     function PopupMenu() {

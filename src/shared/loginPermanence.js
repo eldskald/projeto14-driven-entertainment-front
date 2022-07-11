@@ -6,13 +6,14 @@ export function saveSession(token) {
     localStorage.setItem('sessionToken', token);
 }
 
-export function endSession(setToken, setUsername) {
+export function endSession(setToken, setUsername, setLibrary) {
     localStorage.removeItem('sessionToken');
     setToken('');
     setUsername('');
+    setLibrary([]);
 }
 
-export function loadSession(setToken, setUsername) {
+export function loadSession(setToken, setUsername, setLibrary, setShoppingCart) {
     const data = localStorage.getItem('sessionToken');
     if (!data) {
         return;
@@ -25,6 +26,8 @@ export function loadSession(setToken, setUsername) {
     })
         .then(res => {
             setUsername(res.data.username);
+            setLibrary([...res.data.library]);
+            setShoppingCart([...res.data.cart]);
             setToken(data);
         })
         .catch(() => {

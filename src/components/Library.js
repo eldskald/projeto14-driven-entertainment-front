@@ -118,8 +118,15 @@ const ProductContainer = styled.div`
     align-items: center;
 
     > p {
-        font-family: var(--scriptfont);
-        font-size: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
+        font-family: var(--headerfont);
+        font-size: 28px;
+        text-align: center;
         color: var(--darkcolor);
     }
 `;

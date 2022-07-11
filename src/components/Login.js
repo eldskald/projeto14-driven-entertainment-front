@@ -17,7 +17,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 function Login() {
 
-    const { setToken, setUsername } = useContext(UserContext);
+    const { setToken, setUsername, setLibrary } = useContext(UserContext);
     const { shoppingCart, setShoppingCart } = useContext(CartContext);
     const navigate = useNavigate();
 
@@ -36,18 +36,11 @@ function Login() {
             .then(res => {
                 setToken(res.data.token);
                 setUsername(res.data.username);
+                setLibrary(res.data.library);
+                if (shoppingCart.length === 0) {
+                    setShoppingCart([...res.data.cart]);
+                };
                 saveSession(res.data.token);
-                axios.get(`${API_URL}/cart`, {
-                    headers: {
-                        Authorization: `Bearer ${res.data.token}`
-                }})
-                    .then(res2 => {
-                        if (shoppingCart.length === 0) {
-                            setShoppingCart([...res2.data]);
-                        }
-                        navigate('/');
-                    })
-                    .catch(() => {navigate('/')});
             })
             .catch(err => {
                 setError(err.response.data);
