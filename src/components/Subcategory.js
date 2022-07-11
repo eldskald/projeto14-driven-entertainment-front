@@ -34,7 +34,7 @@ function Subcategory() {
     }
 
     const promiseNewRealsesProducts = axios.get(
-      `${process.env.REACT_APP_API_URL}/productsNewReleases`,
+      `${process.env.REACT_APP_API_URL}/productsNewReleases/${category}/${subcategory}`,
       config
     );
     promiseNewRealsesProducts.then((res) => {
@@ -47,7 +47,7 @@ function Subcategory() {
     });
 
     const promisetopRateProducts = axios.get(
-      `${process.env.REACT_APP_API_URL}/productsTopRated`
+      `${process.env.REACT_APP_API_URL}/productsTopRated/${category}/${subcategory}`
     );
     promisetopRateProducts.then((res) => {
       setLoading(false);
