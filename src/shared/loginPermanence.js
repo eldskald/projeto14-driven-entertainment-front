@@ -31,6 +31,6 @@ export function loadSession(setToken, setUsername, setLibrary, setShoppingCart) 
             setToken(data);
         })
         .catch(() => {
-            endSession(setToken, setUsername);
+            endSession(setToken, setUsername, setLibrary);
         });
 }
