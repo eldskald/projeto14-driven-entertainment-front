@@ -392,6 +392,7 @@ const PopupContainer = styled.div`
     box-shadow: 0px 0px 4px 4px #606060;
 
     > p {
+        margin-bottom: 32px;
         font-family: var(--scriptfont);
         font-size: 24px;
         text-align: center;
