@@ -42,7 +42,8 @@ function Checkout() {
         return `$${sum.toFixed(2)}`;
     }
 
-    function handlePurchase() {
+    function handlePurchase(e) {
+        e.stopPropagation();
         setPopup('popup');
         setMessage('');
         axios.put(`${API_URL}/checkout`,

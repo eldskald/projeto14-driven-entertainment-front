@@ -70,7 +70,8 @@ export default function SelectedProduct() {
         window.open(product.ratingsUrl);
     }
 
-    function handleAddToCart() {
+    function handleAddToCart(e) {
+        e.stopPropagation();
         setShoppingCart([
             ...shoppingCart,
             {
@@ -85,7 +86,8 @@ export default function SelectedProduct() {
         setCartPopup('popup');
     }
 
-    function handleDownload() {
+    function handleDownload(e) {
+        e.stopPropagation();
         setError('Enjoy!');
     }
 
