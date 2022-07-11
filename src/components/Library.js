@@ -36,7 +36,7 @@ function Library() {
                         <Title>Your Library</Title>
                     </TitleContainer>
                     <LibraryContainer>
-                        {library.map((product, index) => {
+                        {library.map((product, index) => (
                             <ProductContainer key={index}>
                                 <Thumbnail
                                     artUrl={product.coverUrl}
@@ -44,7 +44,7 @@ function Library() {
                                 />
                                 <p>{product.name}</p>
                             </ProductContainer>
-                        })}
+                        ))}
                     </LibraryContainer>
                 </Container>
             </OuterContainer>
