@@ -178,16 +178,23 @@ padding: 0 10%;
 align-items:center;
 margin-top:50px;
   > button{
-    font-size:30px;
-    border:none;
-    border-radius:5px;
+    width: 200px;
+    height: 42px;
+    margin: 0px 32px 0px 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
     background-color: var(--maincolor);
-    color:var(--brightcolor);
-    height:30px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-right:10%;
+    cursor: pointer;
+
+    font-family: var(--scriptfont);
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--brightcolor);
+    text-align: center;
   }
   > button:hover{
     cursor:pointer;
