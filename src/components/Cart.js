@@ -31,7 +31,6 @@ export default function Cart() {
     const { shoppingCart, setShoppingCart } = useContext(CartContext);
 
     function Product({ id, coverArt, title, category, subcategory, price, index }) {
-        console.log(price);
         return (
             <ProductContainer>
                 <CoverAndTitleAndCategory>
@@ -57,6 +56,9 @@ export default function Cart() {
     }
 
     function handleClick(category, subcategory, name) {
+        console.log(category);
+        console.log(subcategory);
+        console.log(name);
         navigate(`/products/${category}/${subcategory}/${name}`);
     }
 
