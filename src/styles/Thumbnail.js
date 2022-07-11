@@ -22,7 +22,8 @@ const Container = styled.div`
     cursor: pointer;
 
     > img {
-        height: 100%;
+        min-height: 100%;
+        min-width: 100%;
         object-fit: cover;
     }
 `;

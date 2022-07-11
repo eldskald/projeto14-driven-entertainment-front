@@ -370,6 +370,7 @@ const PopupBackground = styled.div`
     bottom: 0px;
     left: 0px;
     right: 0px;
+    z-index: 2;
 
     display: flex;
     justify-content: center;
@@ -383,6 +384,7 @@ const PopupContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 2;
 
     background-color: var(--brightcolor);
     border: 1px solid var(--graycolor);

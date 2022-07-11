@@ -160,13 +160,12 @@ function Home() {
 
 const OuterContainer = styled.div`
   position: absolute;
-  top: 112px;
+  top: 52px;
   bottom: 0px;
   left: 0px;
   right: 0px;
 
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction:column;
   overflow-y: scroll;
@@ -210,8 +209,6 @@ margin-top:50px;
 
 const InnerContainer = styled.div`
   width: 1200px;
-  height: 100%;
-
   padding: 32px 32px 0px 32px;
   display: flex;
   flex-direction: column;
@@ -229,16 +226,16 @@ const TitleContainer = styled.div`
 `;
 
 const ContentProduct = styled.div`
-  min-width: 100%;
-  margin: 30px 0;
+  width: 100%;
+  height: 722px;
+  margin: 32px 0px;
+
   border-radius: 32px;
   box-shadow: 0px 0px 16px #c0c0c0;
   border: 1px solid var(--graycolor);
   background-color: var(--brightcolor);
+
   display: flex;
-  flex-wrap: wrap;
-  flex-grow: 1;
-  overflow-x: scroll;
 
   margin-top: 16px;
   @media (max-width: 1200px) {
@@ -251,29 +248,34 @@ const ContentProduct = styled.div`
 
 const ProductsDiv = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow-x: scroll;
 `;
 
 const IndividualContent = styled.div`
-  width: 18%;
-  height: 100%;
+  height: 360px;
+  width: 250px;
   
-  padding: 0px 16px;
+  padding: 32px 32px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
   > h1 {
     margin-top: 8px;
 
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;  
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   
     font-family: var(--headerfont);
     font-size: 28px;
+    text-align: center;
     color: var(--darkcolor);
   }
 

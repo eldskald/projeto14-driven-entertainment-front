@@ -96,6 +96,7 @@ const OuterContainer = styled.div`
     height: 100px;
     top: 0px;
     left: 0px;
+    z-index: 1;
 
     display: flex;
     align-items: center;
@@ -231,7 +232,7 @@ const PopupBackground = styled.div`
     bottom: 0px;
     left: 0px;
     right: 0px;
-    z-index: 1;
+    z-index: 2;
 
     background-color: rgba(0, 0, 0, 0.5);
 `;
@@ -240,7 +241,7 @@ const PopupContainer = styled.div`
     position: absolute;
     top: 32px;
     right: 32px;
-    z-index: 1;
+    z-index: 2;
 
     padding: 16px;
     display: flex;
