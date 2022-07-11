@@ -50,7 +50,7 @@ export default function SelectedProduct() {
 
     function checkIfItsOnLibrary() {
         for (let i = 0; i < library.length; i++) {
-            if (library[i] === product._id) {
+            if (library[i].prodId === product._id) {
                 return true;
             }
         }
