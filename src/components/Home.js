@@ -28,6 +28,7 @@ function Home() {
   const { token } = useContext(UserContext);
   const [newProducts, setnewProducts] = useState(null);
   const [topRatedProducts, setTopRatedProducts] = useState(null);
+  const [categories, setCategories]=useState(null);
   const [loading, setLoading] = useState(true);
   const navigate=useNavigate();
 
@@ -57,21 +58,33 @@ function Home() {
       console.log(err.response.data);
     });
 
-    const promiseMoreSalesProducts = axios.get(
+    const promisetopRateProducts = axios.get(
       `${process.env.REACT_APP_API_URL}/productsTopRated`
     );
-    promiseMoreSalesProducts.then((res) => {
+    promisetopRateProducts.then((res) => {
       setLoading(false);
       setTopRatedProducts(res.data);
     });
-    promiseMoreSalesProducts.catch((err) => {
+    promisetopRateProducts.catch((err) => {
       setLoading(false);
       console.log(err.response.data);
     });
+
+   axios.get(`${process.env.REACT_APP_API_URL}/categories`)
+      .then(res=>{
+        setLoading(false);
+        setCategories(res.data);
+      })
+      .catch(err=>{
+        setLoading(false);
+        console.log(err.response.data)
+      });
+    
+    setLoading(false);
   }, [token]);
 
   function HomeScreenContent() {
-    if (!newProducts || !topRatedProducts) {
+    if (!newProducts || !topRatedProducts || !categories) {
       return (
         <Loading>
           <BallTriangle
@@ -100,6 +113,11 @@ function Home() {
             <>
               <Header />
               <OuterContainer>
+                <CategoryContainer>
+                  {categories.map((cat,index)=>{
+                    return (<button key={index}>{cat}</button>)
+                  })}
+                </CategoryContainer>
                 <InnerContainer>
                   <TitleContainer>
                     <Title>New Releases</Title>
@@ -162,6 +180,36 @@ const OuterContainer = styled.div`
 
   display: flex;
   justify-content: center;
+  flex-direction:column;
+`;
+
+const CategoryContainer =styled.div`
+display:flex;
+width:100%;
+justify-content:center;
+padding: 0 10%;
+align-items:center;
+margin-top:50px;
+  > button{
+    font-size:30px;
+    border:none;
+    border-radius:5px;
+    background-color: var(--maincolor);
+    color:var(--brightcolor);
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:10%;
+  }
+  > button:hover{
+    cursor:pointer;
+  }
+  @media (max-width:660px) {
+    >button{
+      font-size:20px;
+    }
+  }
 `;
 
 const InnerContainer = styled.div`
