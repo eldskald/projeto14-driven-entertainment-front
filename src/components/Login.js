@@ -36,7 +36,7 @@ function Login() {
             .then(res => {
                 setToken(res.data.token);
                 setUsername(res.data.username);
-                setLibrary(res.data.library);
+                setLibrary([...res.data.library]);
                 if (shoppingCart.length === 0) {
                     setShoppingCart([...res.data.cart]);
                 };
