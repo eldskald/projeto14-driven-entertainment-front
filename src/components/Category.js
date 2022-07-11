@@ -126,8 +126,8 @@ function Category() {
                                                         key={prod._id}
                                                     >
                                                         <Thumbnail artUrl={prod.image} />
-                                                        <p>{prod.name}</p>
-                                                        <p>$ {prod.price.toFixed(2)}</p>
+                                                        <h1>{prod.name}</h1>
+                                                        <h2>${prod.price.toFixed(2)}</h2>
                                                     </IndividualContent>
                                                 );
                                             })}
@@ -145,8 +145,8 @@ function Category() {
                                                         key={prod._id}
                                                     >
                                                         <Thumbnail artUrl={prod.image} />
-                                                        <p>{prod.name}</p>
-                                                        <p>$ {prod.price.toFixed(2)}</p>
+                                                        <h1>{prod.name}</h1>
+                                                        <h2>${prod.price.toFixed(2)}</h2>
                                                     </IndividualContent>
                                                 );
                                             })}
@@ -185,7 +185,8 @@ const CategoryContainer = styled.div`
   width:100%;
   justify-content: center;
   align-items: center;    
-  margin-top:90px;
+  margin-top: 90px;
+  margin-bottom: 64px;
   flex-grow: 1;
   padding: 32px;
   display: flex;

@@ -104,8 +104,8 @@ function Subcategory() {
                             key={prod._id}
                           >
                             <Thumbnail artUrl={prod.image} />
-                            <p>{prod.name}</p>
-                            <p>$ {prod.price.toFixed(2)}</p>
+                            <h1>{prod.name}</h1>
+                            <h2>${prod.price.toFixed(2)}</h2>
                           </IndividualContent>
                         );
                       })}
@@ -123,8 +123,8 @@ function Subcategory() {
                             key={prod._id}
                           >
                             <Thumbnail artUrl={prod.image} />
-                            <p>{prod.name}</p>
-                            <p>$ {prod.price.toFixed(2)}</p>
+                            <h1>{prod.name}</h1>
+                            <h2>${prod.price.toFixed(2)}</h2>
                           </IndividualContent>
                         );
                       })}
@@ -146,7 +146,7 @@ function Subcategory() {
 
 const OuterContainer = styled.div`
   position: absolute;
-  top: 52px;
+  top: 112px;
   bottom: 0px;
   left: 0px;
   right: 0px;
