@@ -38,10 +38,10 @@ export default function Cart() {
                     <TitleAndCategory onClick={() => navigate(`/${id}`)} >
                         <h1>{title}</h1>
                         <h2>{category}</h2>
-                        <h3>{`$${price.toFixed(2)}`}</h3>
+                        <h3>{`$${Number(price).toFixed(2)}`}</h3>
                     </TitleAndCategory>
                 </CoverAndTitleAndCategory>
-                <Pricetag>{`$${price.toFixed(2)}`}</Pricetag>
+                <Pricetag>{`$${Number(price).toFixed(2)}`}</Pricetag>
                 <RemoveButton>
                     <ion-icon
                         name='trash-outline'
@@ -90,7 +90,7 @@ export default function Cart() {
                                 title={product.name}
                                 category={product.category}
                                 coverArt={product.coverUrl}
-                                price={`$${product.price.toFixed(2)}`}
+                                price={`$${Number(product.price).toFixed(2)}`}
                                 index={index}
                             />
                         ))}
